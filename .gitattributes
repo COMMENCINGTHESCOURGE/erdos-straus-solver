@@ -1,0 +1,4 @@
+erdos_output.json filter=lfs diff=lfs merge=lfs -text
+erdos_full_log.json filter=lfs diff=lfs merge=lfs -text
+erdos_history.json filter=lfs diff=lfs merge=lfs -text
+cold_storage/* filter=lfs diff=lfs merge=lfs -text
