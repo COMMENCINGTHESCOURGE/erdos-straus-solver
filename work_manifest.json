@@ -1,0 +1,177 @@
+{
+  "type": "ERDOS_STRAUS_WORK_MANIFEST",
+  "flank": 31,
+  "version": "v113",
+  "engine": "v113_quantum_flank_31",
+  "axiom": "STATUTORY_SIEVE_v3",
+  "target": 50000000,
+  "start": 2,
+  "chunk_size": 2000000,
+  "total_chunks": 25,
+  "total_solutions": 63270,
+  "stable_total": 0,
+  "breach_total": 25,
+  "stable_regions": [],
+  "breach_regions": [
+    {
+      "start": 2,
+      "end": 2000002,
+      "solutions": 2563,
+      "mod9_count": 300
+    },
+    {
+      "start": 2000002,
+      "end": 4000002,
+      "solutions": 2527,
+      "mod9_count": 300
+    },
+    {
+      "start": 4000002,
+      "end": 6000002,
+      "solutions": 2527,
+      "mod9_count": 300
+    },
+    {
+      "start": 6000002,
+      "end": 8000002,
+      "solutions": 2535,
+      "mod9_count": 300
+    },
+    {
+      "start": 8000002,
+      "end": 10000002,
+      "solutions": 2533,
+      "mod9_count": 300
+    },
+    {
+      "start": 10000002,
+      "end": 12000002,
+      "solutions": 2526,
+      "mod9_count": 300
+    },
+    {
+      "start": 12000002,
+      "end": 14000002,
+      "solutions": 2534,
+      "mod9_count": 300
+    },
+    {
+      "start": 14000002,
+      "end": 16000002,
+      "solutions": 2524,
+      "mod9_count": 300
+    },
+    {
+      "start": 16000002,
+      "end": 18000002,
+      "solutions": 2533,
+      "mod9_count": 300
+    },
+    {
+      "start": 18000002,
+      "end": 20000002,
+      "solutions": 2526,
+      "mod9_count": 300
+    },
+    {
+      "start": 20000002,
+      "end": 22000002,
+      "solutions": 2525,
+      "mod9_count": 300
+    },
+    {
+      "start": 22000002,
+      "end": 24000002,
+      "solutions": 2535,
+      "mod9_count": 300
+    },
+    {
+      "start": 24000002,
+      "end": 26000002,
+      "solutions": 2526,
+      "mod9_count": 300
+    },
+    {
+      "start": 26000002,
+      "end": 28000002,
+      "solutions": 2522,
+      "mod9_count": 300
+    },
+    {
+      "start": 28000002,
+      "end": 30000002,
+      "solutions": 2527,
+      "mod9_count": 300
+    },
+    {
+      "start": 30000002,
+      "end": 32000002,
+      "solutions": 2530,
+      "mod9_count": 300
+    },
+    {
+      "start": 32000002,
+      "end": 34000002,
+      "solutions": 2535,
+      "mod9_count": 300
+    },
+    {
+      "start": 34000002,
+      "end": 36000002,
+      "solutions": 2532,
+      "mod9_count": 300
+    },
+    {
+      "start": 36000002,
+      "end": 38000002,
+      "solutions": 2539,
+      "mod9_count": 300
+    },
+    {
+      "start": 38000002,
+      "end": 40000002,
+      "solutions": 2526,
+      "mod9_count": 300
+    },
+    {
+      "start": 40000002,
+      "end": 42000002,
+      "solutions": 2532,
+      "mod9_count": 300
+    },
+    {
+      "start": 42000002,
+      "end": 44000002,
+      "solutions": 2527,
+      "mod9_count": 300
+    },
+    {
+      "start": 44000002,
+      "end": 46000002,
+      "solutions": 2526,
+      "mod9_count": 300
+    },
+    {
+      "start": 46000002,
+      "end": 48000002,
+      "solutions": 2525,
+      "mod9_count": 300
+    },
+    {
+      "start": 48000002,
+      "end": 50000000,
+      "solutions": 2535,
+      "mod9_count": 300
+    }
+  ],
+  "mod9_solutions": 7500,
+  "mod9_unique_n": 7500,
+  "mod9_breach": true,
+  "elapsed_s": 8.62,
+  "ts": "2026-06-27T20:48:09.153745+00:00",
+  "ts_epoch": 1782593289.153745,
+  "hash": "1240527237939a408d56b6700e68ec1df60b61c984fd4871d37854c719e0d90f",
+  "updated": "2026-07-09T16:32:08.062072+00:00",
+  "solutions_total": 4166666,
+  "nodes": {}
+}
