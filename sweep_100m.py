@@ -127,14 +127,19 @@ def check_A(p, A):
     return False, None
 
 def find_min_A(p, max_m=200):
-    known_A = [7, 11, 15, 19, 23, 31, 39, 43, 47, 51, 59, 67, 71, 79, 83, 87, 103]
+    # All 22 known valid A-values (ascending)
+    known_A = [7, 11, 15, 19, 23, 31, 39, 43, 47, 51, 59, 67, 71,
+               79, 83, 87, 95, 103, 107, 111, 127, 159]
+    known_set = set(known_A)
+    # Phase 1: scan known valid values in ascending order
     for A in known_A:
         ok, info = check_A(p, A)
         if ok:
             return info
+    # Phase 2: scan remaining m candidates in ascending order
     for m in range(max_m):
         A = 4 * m + 3
-        if A in known_A:
+        if A in known_set:
             continue
         ok, info = check_A(p, A)
         if ok:

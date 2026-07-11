@@ -18,7 +18,7 @@ This is the vinculum operating on integers instead of fields — same algebraic 
 
 | Claim | Status |
 |-------|--------|
-| **Sieve Verification Boundary** | **Verified up to ~8.00 × 10¹³ (80 Trillion) on Kaggle GPU/CPU. Zero prime survivors.** |
+| **Sieve existence check** | **Computational run through ~8.00e13 (80 trillion) on Kaggle; zero survivors. Literature has reached 1e17-1e18 for plain existence checks. The novel contribution is the 22-portal classification at 1e8 -- see EMPIRICAL_NOTE.md.** |
 | All exceptional primes (p≡1 mod 12, c no 2mod3 factor) solved | **289,372/289,372 up to 10⁸ (100%)** |
 | 22-portal classification covers all exceptional primes | **22 A-values, max A=159** |
 | Zero failures at any scale | **10⁶: 4,540/4,540, 10⁷: 35,750/35,750, 10⁸: 289,372/289,372** |
