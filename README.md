@@ -14,10 +14,11 @@ This is the vinculum operating on integers instead of fields — same algebraic 
 
 ---
 
-## 🏆 Key Results (Verified June 2026)
+## 🏆 Key Results (Verified July 2026)
 
 | Claim | Status |
 |-------|--------|
+| **Sieve Verification Boundary** | **Verified up to ~8.00 × 10¹³ (80 Trillion) on Kaggle GPU/CPU. Zero prime survivors.** |
 | All exceptional primes (p≡1 mod 12, c no 2mod3 factor) solved | **289,372/289,372 up to 10⁸ (100%)** |
 | 22-portal classification covers all exceptional primes | **22 A-values, max A=159** |
 | Zero failures at any scale | **10⁶: 4,540/4,540, 10⁷: 35,750/35,750, 10⁸: 289,372/289,372** |
