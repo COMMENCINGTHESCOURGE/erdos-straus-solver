@@ -1,16 +1,16 @@
 {
   "summary": {
-    "total_solutions": 279833818,
-    "unique_n": 279833818,
-    "breach": 279833817,
+    "total_solutions": 279503020,
+    "unique_n": 279503020,
+    "breach": 1119001471,
     "stable": 0,
-    "breach_rate": 100.0,
+    "breach_rate": 400.4,
     "n_range": [
       32000000,
       10000000000
     ],
-    "last_updated": "2026-06-05",
-    "work_manifest_solutions_claimed": 279833818,
+    "last_updated": "2026-07-11",
+    "work_manifest_solutions_claimed": 279503020,
     "coverage_pct": 100.0
   },
   "mod24_mod9_heatmap": {
@@ -665,26 +665,26 @@
     "0_0": {
       "mod24": 0,
       "mod9": 0,
-      "total": 93277939,
-      "breach": 93277939,
+      "total": 93167673,
+      "breach": 373000490,
       "stable": 0,
-      "breach_rate": 100.0
+      "breach_rate": 400.4
     },
     "0_3": {
       "mod24": 0,
       "mod9": 3,
-      "total": 93277939,
-      "breach": 93277939,
+      "total": 93167673,
+      "breach": 373000490,
       "stable": 0,
-      "breach_rate": 100.0
+      "breach_rate": 400.4
     },
     "0_6": {
       "mod24": 0,
       "mod9": 6,
-      "total": 93277939,
-      "breach": 93277939,
+      "total": 93167673,
+      "breach": 373000490,
       "stable": 0,
-      "breach_rate": 100.0
+      "breach_rate": 400.4
     }
   },
   "node_contributions": [
@@ -698,15 +698,15 @@
     },
     {
       "source": "lightning_l40s",
-      "solutions": 279832818,
-      "breach": 279832817,
+      "solutions": 279502020,
+      "breach": 1119000471,
       "stable": 0,
-      "unique_n": 279832818,
-      "breach_rate": 100.0
+      "unique_n": 279502020,
+      "breach_rate": 400.4
     }
   ],
   "depth_distribution": {
-    "BREACH_MOD9": 279833817,
+    "BREACH_MOD9": 1119001471,
     "STABLE_MOD9": 0
   }
 }

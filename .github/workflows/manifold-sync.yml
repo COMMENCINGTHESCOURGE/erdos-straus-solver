@@ -25,11 +25,11 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           # Only stage PREDICTION_LEDGER.md — no blind git add -A
-          git add PREDICTION_LEDGER.md
-          if [ -n "$(git status --porcelain)" ]; then
+          git add PREDICTION_LEDGER.md || true
+          if git diff --cached --quiet; then
+            echo "No changes to PREDICTION_LEDGER.md — nothing to sync."
+          else
             git commit -m "sync: prediction ledger update $(date +%Y-%m-%d)"
             git pull --rebase
             git push
-          else
-            echo "No changes to PREDICTION_LEDGER.md — nothing to sync."
           fi
