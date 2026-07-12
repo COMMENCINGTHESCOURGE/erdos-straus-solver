@@ -49,44 +49,32 @@ def test_find_min_A_is_strictly_ascending():
 
 # ---------- Test 2: Unlisted A-values below listed ones ----------
 
-def test_unlisted_A_below_listed():
-    """For each known A-value, verify no unlisted value below it actually works
-    as a *smaller* minimal A for the same prime.
-
-    This catches the case where the biased scan would skip a valid smaller A.
+def test_unlisted_A_below_listed(monkeypatch):
+    """Verify find_min_A checks A-values in strict ascending order using a mock.
+    
+    We inject a fake predicate that accepts both A=27 and A=31. If the scan
+    is correctly ascending, it must return 27 (m=6), even though 31 (m=7) is 
+    one of the 'historically listed' A-values and 27 is an 'unlisted' one.
     """
-    from sweep_100m import check_A
-
-    known_A = [7, 11, 15, 19, 23, 31, 39, 43, 47, 51, 59, 67, 71,
-               79, 83, 87, 95, 103, 107, 111, 127, 159]
-    known_set = set(known_A)
-
-    # Test primes where we expect higher A-values
-    test_primes = [13, 37, 61, 157, 193, 241, 277, 313, 349, 397]
-
-    for p in test_primes:
-        # Find the actual minimal A by strict ascending scan
-        actual_min_A = None
-        for m in range(200):
-            A = 4 * m + 3
-            ok, _ = check_A(p, A)
-            if ok:
-                actual_min_A = A
-                break
-
-        if actual_min_A is None:
-            continue
-
-        # The minimal A found by ascending scan must be <= any known A that works
-        for A in known_A:
-            if A < actual_min_A:
-                ok, _ = check_A(p, A)
-                # If a known A below the actual minimum works, something is wrong
-                # with our ascending scan
-                assert not ok, (
-                    f"p={p}: known A={A} works but ascending scan returned "
-                    f"A={actual_min_A} as minimal"
-                )
+    import sweep_100m
+    
+    def fake_check_A(p, A):
+        # Fake predicate that only accepts A=27 and A=31
+        if A in (27, 31):
+            return True, {"A": A}
+        return False, None
+        
+    # Patch check_A in the sweep_100m module
+    monkeypatch.setattr(sweep_100m, "check_A", fake_check_A)
+    
+    # Run find_min_A with any prime (the prime value is ignored by our mock)
+    result = sweep_100m.find_min_A(13, max_m=200)
+    
+    assert result is not None, "find_min_A should have found a solution"
+    assert result["A"] == 27, (
+        f"Strict ascending order violated! Expected A=27 (m=6) but got A={result['A']}. "
+        f"The scan likely jumped ahead to known values like 31."
+    )
 
 
 # ---------- Test 3: sweep_100m.py is importable ----------

@@ -17,18 +17,24 @@ def init_small_primes(limit):
             is_p[start:limit+1:step] = b'\x00' * ((limit - start) // step + 1)
     SMALL_PRIMES = [i for i, v in enumerate(is_p) if v]
 
-def miller_rabin(n, k=10):
+def miller_rabin(n):
     if n < 2:
         return False
-    for p in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]:
+    # Trial division for small primes
+    for p in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]:
         if n % p == 0:
             return n == p
+    
+    # Deterministic Miller-Rabin for n < 2^64
     d, s = n - 1, 0
     while d % 2 == 0:
         d //= 2
         s += 1
-    for _ in range(k):
-        a = random.randrange(2, n - 1)
+    
+    witnesses = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]
+    for a in witnesses:
+        if a >= n:
+            break
         x = pow(a, d, n)
         if x == 1 or x == n - 1:
             continue
@@ -173,13 +179,25 @@ def is_exceptional(p):
 
 # ---------- Main ----------
 def main():
-    """Run the full exceptional-prime sweep to 10^8."""
+    """Run the full exceptional-prime sweep."""
     from collections import Counter
+    import argparse
+    import json
+    import gzip
+    import os
+    import platform
+    import hashlib
+    import subprocess
+
+    parser = argparse.ArgumentParser(description="Erdős-Straus Exceptional Prime Sweep")
+    parser.add_argument('--max-p', type=int, default=100_000_000, help='Maximum prime to scan')
+    parser.add_argument('--output-dir', type=str, default='results', help='Directory for results')
+    args = parser.parse_args()
 
     init_small_primes(5000000)
     print(f"Small primes: {len(SMALL_PRIMES)} up to {PRIME_LIMIT}")
 
-    MAX_P = 100_000_000
+    MAX_P = args.max_p
     print(f"Scanning exceptional primes up to {MAX_P}...")
 
     # Sieve using faster slice-assignment approach
@@ -246,13 +264,48 @@ def main():
         pct = m_dist[m_val] / count * 100
         print(f"  m={m_val:3d} (A={A_val:3d}): {m_dist[m_val]:6d} ({pct:.2f}%)")
 
-    print(f"\nHighest minimal m values:")
-    for r in sorted(results, key=lambda x: -x["m"])[:30]:
-        print(f"  p={r['p']:9d}, A={r['A']:3d}, m={r['m']:3d}")
+    # Durable Output
+    os.makedirs(args.output_dir, exist_ok=True)
+    json_path = os.path.join(args.output_dir, f"sweep_p{MAX_P}.json.gz")
+    manifest_path = os.path.join(args.output_dir, f"sweep_p{MAX_P}_manifest.json")
 
-if __name__ != '__main__':
-    # When imported, just set up small primes
-    init_small_primes(5000000)
-else:
+    print(f"\nWriting durable results to {json_path}...")
+    with gzip.open(json_path, 'wt', encoding='utf-8') as f:
+        json.dump(results, f)
+
+    # Calculate SHA-256
+    sha256 = hashlib.sha256()
+    with open(json_path, 'rb') as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            sha256.update(chunk)
+    file_hash = sha256.hexdigest()
+
+    # Get Git SHA
+    try:
+        git_sha = subprocess.check_output(['git', 'rev-parse', 'HEAD'], stderr=subprocess.STDOUT).decode().strip()
+    except Exception:
+        git_sha = "unknown"
+
+    manifest = {
+        "command": f"python sweep_100m.py --max-p {MAX_P}",
+        "git_sha": git_sha,
+        "python_version": platform.python_version(),
+        "os": platform.platform(),
+        "duration_seconds": round(elapsed, 2),
+        "total_scanned": count,
+        "total_solved": count - failed,
+        "total_failed": failed,
+        "max_minimal_m": max_m,
+        "mean_minimal_m": round(sum_m / count if count else 0, 2),
+        "data_file": os.path.basename(json_path),
+        "data_sha256": file_hash,
+        "distribution_m": dict(m_dist)
+    }
+
+    with open(manifest_path, 'w', encoding='utf-8') as f:
+        json.dump(manifest, f, indent=2)
+    print(f"Manifest written to {manifest_path}")
+
+if __name__ == '__main__':
     main()
 

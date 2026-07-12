@@ -1,0 +1,24 @@
+{
+  "command": "python sweep_100m.py --max-p 100000",
+  "git_sha": "b9c5b5494b842363890ff5aabf2713561e90388e",
+  "python_version": "3.11.9",
+  "os": "Windows-10-10.0.26200-SP0",
+  "duration_seconds": 0.19,
+  "total_scanned": 606,
+  "total_solved": 606,
+  "total_failed": 0,
+  "max_minimal_m": 10,
+  "mean_minimal_m": 2.01,
+  "data_file": "sweep_p100000.json.gz",
+  "data_sha256": "befb0edd265c9921eabde63fe5b8683e41aa1ed9a45d7a1b7052182998ab924f",
+  "distribution_m": {
+    "1": 312,
+    "2": 142,
+    "3": 58,
+    "4": 57,
+    "7": 8,
+    "5": 25,
+    "9": 3,
+    "10": 1
+  }
+}

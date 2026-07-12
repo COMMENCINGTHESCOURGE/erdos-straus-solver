@@ -134,7 +134,7 @@ p mod 7 ∈ {1, 2, 4}:
 | 15 | 3 | 3 | 0.7% |
 | 19+ | 4+ | 4 | 1.0% |
 
-**10⁸ scale (exceptional primes only):**
+**Debiased empirical results through 10⁸ (exceptional primes only):**
 
 | A | m | Count (10⁸) | % | Trend from 10⁷ |
 |---|---|---|---|---|
@@ -154,16 +154,16 @@ p mod 7 ∈ {1, 2, 4}:
 | 79 | 19 | 60 | 0.02% | Very rare |
 | 83 | 20 | 16 | <0.01% | Very rare |
 | 87 | 21 | 12 | <0.01% | Very rare |
-| 95 | 23 | 1 | <0.01% | One case: p=38,409,121 |
-| 103 | 25 | 8 | <0.01% | Very rare |
+| 95 | 23 | 2 | <0.01% | p=11464489, p=38409121 |
+| 103 | 25 | 7 | <0.01% | Very rare |
 | 107 | 26 | 4 | <0.01% | Very rare |
 | 111 | 27 | 5 | <0.01% | Very rare |
-| 127 | 31 | 2 | <0.01% | p=36,851,929 and p=68,204,761 |
-| 159 | 39 | 1 | <0.01% | One case: p=91,267,201 |
+| 127 | 31 | 2 | <0.01% | p=36851929, p=68204761 |
+| 159 | 39 | 1 | <0.01% | One case: p=91267201 |
 
-**Preliminary observation (pending validation):** Certain A values appear to be systematically skipped as minimal solutions. The apparently skipped values include A ∈ {3, 27, 35, 55, 63, 75, 91, 99, 115, 119, 123, 131, 135, 139, 143, 147, 151, 155}. However, this observation was produced by a scan implementation (`sweep_100m.py`) that searched the 22 known A-values before testing other candidates — **this ordering bias may have prejudged the result**. Until the full $p \le 10^8$ dataset is re-scanned with strict ascending enumeration (as implemented in `min_A_search.py`), the skip pattern and the claim that exactly 22 minimal shifts occur are not established.
+**Observation on skipped shifts (Squareful Barrier):** Certain A values appear to be systematically skipped as minimal solutions. The apparently skipped values include A ∈ {3, 27, 35, 55, 63, 75, 91, 99, 115, 119, 123, 131, 135, 139, 143, 147, 151, 155}. The unbiased $p \le 10^8$ dataset re-scanned with strict ascending enumeration verified that no exceptional primes within this domain have these shifts as their minimal solution. However, this is currently an empirical observation; establishing that this skip pattern is *structural* for all exceptional primes requires a formal theorem.
 
-**Maximal minimal A grows very slowly:** At p = 10⁵, max m = 12. At p = 10⁶, max m = 17. At p = 10⁷, max m = 27. At p = 10⁸, max m = 39. The growth is consistent with `O(log p)` or even `O(log log p)` scaling, strongly suggesting a universal absolute bound C exists such that every exceptional prime has a valid shift with A ≤ C. (This applies to $4/p^2$; extension to $4/p$ requires a descent theorem.)
+**Maximal minimal A grows very slowly:** At p = 10⁵, max m = 10. At p = 10⁶, max m = 17. At p = 10⁷, max m = 25. At p = 10⁸, max m = 39. The growth is consistent with `O(log p)` or even `O(log log p)` scaling, strongly suggesting a universal absolute bound C exists such that every exceptional prime has a valid shift with A ≤ C. (This applies to $4/p^2$; extension to $4/p$ requires a descent theorem.)
 
 ## Open Questions
 
