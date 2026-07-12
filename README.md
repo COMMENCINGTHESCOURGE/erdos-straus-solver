@@ -21,7 +21,11 @@ This is the vinculum operating on integers instead of fields — same algebraic 
 | **Sieve existence check** | **Computational run through ~8.00e13 (80 trillion) on Kaggle; zero survivors. Literature has reached 1e17-1e18 for plain existence checks. The novel contribution is the 22-portal classification at 1e8 -- see EMPIRICAL_NOTE.md.** |
 | All tested exceptional-prime-indexed prime squares ($p^2$) solved | **289,372/289,372 up to 10⁸ (100%). Note: solutions are for $4/p^2$, not $4/p$. A descent theorem is required to extend to $4/p$.** |
 | 22-portal classification covers all tested $p^2$ | **22 A-values, max A=159** |
-| Zero failures at any scale | **10⁶: 7,825/7,825, 10⁷: 62,113/62,113, 10⁸: 289,372/289,372** |
+| Zero failures at any scale | <!-- ZERO_FAILURES_START -->
+
+**10⁶: 4540/4540, 10⁷: 35750/35750, 10⁸: 289372/289372**
+
+<!-- ZERO_FAILURES_END --> |
 | Mean minimal m = 2.25 | Tightly bounded |
 | A=7 dominates at ~49.5% | Stable fraction across all scales |
 | A=159 (m=39) at p=91,267,201 | Max observed, consistent with O(log p) growth |

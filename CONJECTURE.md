@@ -163,7 +163,7 @@ p mod 7 ∈ {1, 2, 4}:
 
 **Observation on skipped shifts (Squareful Barrier):** Certain A values appear to be systematically skipped as minimal solutions. The apparently skipped values include A ∈ {3, 27, 35, 55, 63, 75, 91, 99, 115, 119, 123, 131, 135, 139, 143, 147, 151, 155}. The unbiased $p \le 10^8$ dataset re-scanned with strict ascending enumeration verified that no exceptional primes within this domain have these shifts as their minimal solution. However, this is currently an empirical observation; establishing that this skip pattern is *structural* for all exceptional primes requires a formal theorem.
 
-**Maximal minimal A grows very slowly:** At p = 10⁵, max m = 10. At p = 10⁶, max m = 17. At p = 10⁷, max m = 25. At p = 10⁸, max m = 39. The growth is consistent with `O(log p)` or even `O(log log p)` scaling, strongly suggesting a universal absolute bound C exists such that every exceptional prime has a valid shift with A ≤ C. (This applies to $4/p^2$; extension to $4/p$ requires a descent theorem.)
+**Maximal minimal A grows very slowly:** At p = 10⁵, max m = 10. At p = 10⁶, max m = 17. At p = 10⁷, max m = 25. At p = 10⁸, max m = 39. The growth is consistent with slow observed growth such as `O(log p)` or even `O(log log p)` scaling. While this slow observed growth suggests a *possible slowly growing bound*, it is distinct from the much stronger *bounded-(A) conjecture* (which posits a universal absolute constant bound C exists such that every exceptional prime has a valid shift with A ≤ C). (This applies to $4/p^2$; extension to $4/p$ requires a descent theorem.)
 
 ## Open Questions
 
@@ -175,6 +175,6 @@ The current experiment strictly proves decompositions for the tested exceptional
 1. Does the disjointness hold for all `n`, or is there some `n` where both solvers converge to the same triple?
 2. Does Omega's coverage remain 100% as `n → ∞`, or is there a harmonic bound?
 3. Can the `(y,z)` pairs from the two families be used to triangulate a third factorization family?
-4. Why are certain A values (27, 35, 47) systematically skipped as minimal solutions? Is there a structural obstruction?
+4. Why are certain A values (e.g., 27, 35, 55) systematically skipped as minimal solutions? Is there a structural obstruction?
 5. Does the bounded-A conjecture for Tier 3 (A ≤ 159 for all p, supported by 10^8 data) follow from p-adic properties of the divisor-congruence condition?
 6. Prove that Tier 1 (A = p) and Tier 2 (A = 3p) are exact classifications: the condition on c = (p+3)/4 is both necessary and sufficient.

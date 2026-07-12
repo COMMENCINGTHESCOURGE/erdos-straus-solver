@@ -36,3 +36,5 @@ jobs:
         python -c "import sys; sys.path.insert(0, '.'); import sweep_100m; print('sweep_100m OK')"
     - name: Run pytest
       run: python -m pytest tests/ -x -v
+    - name: Verify datasets
+      run: python verify_datasets.py --results-dir results

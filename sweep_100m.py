@@ -46,22 +46,19 @@ def miller_rabin(n):
             return False
     return True
 
-def pollard_rho(n):
+def pollard_rho(n, seed=2, c=1):
     if n % 2 == 0:
         return 2
     if n % 3 == 0:
         return 3
-    for c in range(1, 100):
-        f = lambda x: (x * x + c) % n
-        x = y = 2
-        d = 1
-        while d == 1:
-            x = f(x)
-            y = f(f(y))
-            d = math.gcd(abs(x - y), n)
-        if d != n:
-            return d
-    return n
+    f = lambda x: (x * x + c) % n
+    x = y = seed
+    d = 1
+    while d == 1:
+        x = f(x)
+        y = f(f(y))
+        d = math.gcd(abs(x - y), n)
+    return d
 
 def factorize_full(n):
     """Factor any integer n using trial division + Pollard rho.
@@ -94,7 +91,19 @@ def factorize_full(n):
                 if miller_rabin(x):
                     res[x] = res.get(x, 0) + 1
                 else:
-                    d = pollard_rho(x)
+                    d = x
+                    for c in range(1, 100):
+                        d = pollard_rho(x, seed=2, c=c)
+                        if d != x and d != 1:
+                            break
+                    if d == x or d == 1:
+                        d = 2
+                        while d * d <= x:
+                            if x % d == 0:
+                                break
+                            d += 1
+                        if d * d > x:
+                            d = x
                     stack.append(d)
                     stack.append(x // d)
     return res
@@ -129,7 +138,7 @@ def check_A(p, A):
             y = (nx + d) // A
             z = (nx + nx * nx // d) // A
             if y > 0 and z > 0 and 4 * x * y * z == n * (x*y + x*z + y*z):
-                return True, {"A": A}
+                return True, {"A": A, "d": d}
     return False, None
 
 def find_min_A(p, max_m=200):
@@ -236,7 +245,7 @@ def main():
                 max_m = m
                 print(f"  NEW MAX m={m} at p={p}, A={info['A']}")
             sum_m += m
-            results.append({"p": p, "A": info["A"], "m": m})
+            results.append({"p": p, "A": info["A"], "m": m, "d": info["d"]})
 
         if count % 2000 == 0:
             elapsed = time.perf_counter() - t0
@@ -270,8 +279,9 @@ def main():
     manifest_path = os.path.join(args.output_dir, f"sweep_p{MAX_P}_manifest.json")
 
     print(f"\nWriting durable results to {json_path}...")
-    with gzip.open(json_path, 'wt', encoding='utf-8') as f:
-        json.dump(results, f)
+    json_bytes = json.dumps(results, separators=(',', ':')).encode('utf-8')
+    with gzip.GzipFile(json_path, 'wb', mtime=0) as f:
+        f.write(json_bytes)
 
     # Calculate SHA-256
     sha256 = hashlib.sha256()
@@ -280,15 +290,25 @@ def main():
             sha256.update(chunk)
     file_hash = sha256.hexdigest()
 
-    # Get Git SHA
+    # Get Git info
     try:
         git_sha = subprocess.check_output(['git', 'rev-parse', 'HEAD'], stderr=subprocess.STDOUT).decode().strip()
+        git_dirty = subprocess.run(['git', 'diff', '--quiet']).returncode != 0
     except Exception:
         git_sha = "unknown"
+        git_dirty = False
+
+    # Get source hash
+    source_sha256 = hashlib.sha256()
+    with open(__file__, 'rb') as f:
+        source_sha256.update(f.read())
+    source_hash = source_sha256.hexdigest()
 
     manifest = {
         "command": f"python sweep_100m.py --max-p {MAX_P}",
-        "git_sha": git_sha,
+        "git_commit": git_sha,
+        "git_dirty": git_dirty,
+        "source_file_sha256": source_hash,
         "python_version": platform.python_version(),
         "os": platform.platform(),
         "duration_seconds": round(elapsed, 2),
