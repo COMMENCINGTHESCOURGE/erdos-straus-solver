@@ -29,7 +29,10 @@ jobs:
         python -m py_compile sieve_l40s_hot_corridor.py
         python -m py_compile master_orchestrator.py
         python -m py_compile progression.py
+        python -m py_compile sweep_100m.py
     - name: Import check
-      run: python -c "import sys; sys.path.insert(0, '.'); import atomic_writer; print('OK')"
+      run: |
+        python -c "import sys; sys.path.insert(0, '.'); import atomic_writer; print('atomic_writer OK')"
+        python -c "import sys; sys.path.insert(0, '.'); import sweep_100m; print('sweep_100m OK')"
     - name: Run pytest
       run: python -m pytest tests/ -x -v

@@ -187,8 +187,7 @@ def main():
     print(f"Limit: {TARGET_LIMIT:,}")
     print("=" * 60)
 
-    chunk_candidates_base = stats["total_checked"]
-    candidates_at_last_save = stats["total_checked"]
+
 
     v = args.v
     s = args.stride

@@ -85,7 +85,8 @@ def omega_solve(n: int, max_harmonics: int = 100) -> Optional[dict]:
     x = (n+A)/4. Find d such that d = -nx (mod A) and d | nx^2.
     Then y = (nx+d)/A, z = (nx + (nx)^2/d)/A.
 
-    Interleaved: per-m, try strict (d|x) then non-strict (d|nx^2). Returns minimal A.
+    Single-pass: at each m, try strict (d|x) then non-strict (d|nx^2).
+    Returns minimal A.
     """
     if n % 4 != 1:
         return None
@@ -93,10 +94,25 @@ def omega_solve(n: int, max_harmonics: int = 100) -> Optional[dict]:
         A = 4 * m + 3
         if (n + A) % 4 != 0:
             continue
-        for strict in [True, False]:
-            result = _omega_check(n, m + 1, strict=strict)
-            if result is not None:
-                return result
+        x = (n + A) // 4
+        nx = n * x
+        target_mod = (-nx) % A
+        # Phase 1: strict — check divisors of x only (fast)
+        for d in omega_divisors(x):
+            if d % A == target_mod:
+                y = (nx + d) // A
+                z = (nx + nx * nx // d) // A
+                if y > 0 and z > 0 and 4 * x * y * z == n * (x*y + x*z + y*z):
+                    return {"x": x, "y": y, "z": z, "A": A, "d": d, "method": "Omega"}
+        # Phase 2: non-strict — check divisors of nx^2 (complete)
+        for g in omega_divisors(nx):
+            for d_prime in omega_divisors(g):
+                d = g * d_prime
+                if d % A == target_mod:
+                    y = (nx + d) // A
+                    z = (nx + nx * nx // d) // A
+                    if y > 0 and z > 0 and 4 * x * y * z == n * (x*y + x*z + y*z):
+                        return {"x": x, "y": y, "z": z, "A": A, "d": d, "method": "Omega"}
     return None
 
 

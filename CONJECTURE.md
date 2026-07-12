@@ -120,6 +120,8 @@ p mod 7 ∈ {1, 2, 4}:
 
 **Computational evidence for Bounded-A conjecture:** ALL 289,372 exceptional primes up to 10⁸ are solved with A ≤ 159 (max m = 39). Mean minimal m = 2.25. Zero failures across all tested ranges.
 
+> **Important:** These results apply to the prime-square equation $4/p^2 = 1/x + 1/y + 1/z$, not directly to the original Erdős–Straus equation $4/p = 1/x + 1/y + 1/z$. A descent theorem establishing that solvability of $4/p^2$ implies solvability of $4/p$ would be required to make that extension.
+
 **Note on scale-dependence:** The VINCULUM_FIX_REPORT (June 2026) found a different distribution at the 10K scale for *all* n ≡ 1 (mod 24), not just exceptional primes. After the `d|x → d|nx²` constraint fix, A=3 (m=0) dominates at 66.1% for composite and prime-square n up to 10K. The 10⁸ table below covers only exceptional primes (p² where p ≡ 1 mod 12), where A=3 is never minimal — the populations differ. Both distributions are correct for their respective domains.
 
 **10K scale (all n ≡ 1 mod 24):**
@@ -159,11 +161,16 @@ p mod 7 ∈ {1, 2, 4}:
 | 127 | 31 | 2 | <0.01% | p=36,851,929 and p=68,204,761 |
 | 159 | 39 | 1 | <0.01% | One case: p=91,267,201 |
 
-**Critical observation:** Certain A values are systematically skipped as minimal solutions. The skipped values are A ∈ {3, 27, 35, 55, 63, 75, 91, 99, 115, 119, 123, 131, 135, 139, 143, 147, 151, 155} (m ∈ {0, 6, 8, 13, 15, 18, 22, 24, 28, 29, 30, 32, 33, 34, 35, 36, 37, 38}). The skip is structural — when a skipped A would work, some smaller A from the permitted set always works first. The pattern of permitted A values is sparse but appears to cover all A = 4m+3 where ℓ₂-adic and ℓ₃-adic properties of p²+A permit the divisor-congruence condition.
+**Preliminary observation (pending validation):** Certain A values appear to be systematically skipped as minimal solutions. The apparently skipped values include A ∈ {3, 27, 35, 55, 63, 75, 91, 99, 115, 119, 123, 131, 135, 139, 143, 147, 151, 155}. However, this observation was produced by a scan implementation (`sweep_100m.py`) that searched the 22 known A-values before testing other candidates — **this ordering bias may have prejudged the result**. Until the full $p \le 10^8$ dataset is re-scanned with strict ascending enumeration (as implemented in `min_A_search.py`), the skip pattern and the claim that exactly 22 minimal shifts occur are not established.
 
-**Maximal minimal A grows very slowly:** At p = 10⁵, max m = 12. At p = 10⁶, max m = 17. At p = 10⁷, max m = 27. At p = 10⁸, max m = 39. The growth is consistent with `O(log p)` or even `O(log log p)` scaling, strongly suggesting a universal absolute bound C exists such that every exceptional prime has a valid shift with A ≤ C.
+**Maximal minimal A grows very slowly:** At p = 10⁵, max m = 12. At p = 10⁶, max m = 17. At p = 10⁷, max m = 27. At p = 10⁸, max m = 39. The growth is consistent with `O(log p)` or even `O(log log p)` scaling, strongly suggesting a universal absolute bound C exists such that every exceptional prime has a valid shift with A ≤ C. (This applies to $4/p^2$; extension to $4/p$ requires a descent theorem.)
 
 ## Open Questions
+
+### Open Descent Problem: From (4/p^2) to (4/p)
+The current experiment strictly proves decompositions for the tested exceptional-prime-indexed prime squares ($4/p^2 = 1/x + 1/y + 1/z$) where $x = (p^2 + A)/4$. It does **not** establish the original conjecture ($4/p = 1/x + 1/y + 1/z$) for those primes unless a valid descent construction is supplied. A descent theorem establishing that solvability of $4/p^2$ implies solvability of $4/p$ (or providing a direct map between their shift parameters) remains an open problem. Until such a theorem is proved, the additive-shift results apply only to the prime-square case.
+
+### Additional Questions
 
 1. Does the disjointness hold for all `n`, or is there some `n` where both solvers converge to the same triple?
 2. Does Omega's coverage remain 100% as `n → ∞`, or is there a harmonic bound?

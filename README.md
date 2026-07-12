@@ -6,7 +6,7 @@
 
 ---
 
-Erdos-Straus hot corridor sieve — integer solver, stride-24, 100% hit rate in tested corridors.
+Erdos-Straus hot corridor sieve — integer solver, stride-24, 100% hit rate in mod-24 corridors (expected: these corridors are pre-filtered to numbers where parametric identities apply).
 
 The Erdos-Straus conjecture states that for every integer n ≥ 2, the fraction 4/n can be expressed as the sum of three unit fractions (Egyptian fractions). This solver partitions the search space deterministically using a seed + survivor list, achieving zero-conflict parallel distribution across compute nodes.
 
@@ -19,15 +19,15 @@ This is the vinculum operating on integers instead of fields — same algebraic 
 | Claim | Status |
 |-------|--------|
 | **Sieve existence check** | **Computational run through ~8.00e13 (80 trillion) on Kaggle; zero survivors. Literature has reached 1e17-1e18 for plain existence checks. The novel contribution is the 22-portal classification at 1e8 -- see EMPIRICAL_NOTE.md.** |
-| All exceptional primes (p≡1 mod 12, c no 2mod3 factor) solved | **289,372/289,372 up to 10⁸ (100%)** |
-| 22-portal classification covers all exceptional primes | **22 A-values, max A=159** |
-| Zero failures at any scale | **10⁶: 4,540/4,540, 10⁷: 35,750/35,750, 10⁸: 289,372/289,372** |
+| All tested exceptional-prime-indexed prime squares ($p^2$) solved | **289,372/289,372 up to 10⁸ (100%). Note: solutions are for $4/p^2$, not $4/p$. A descent theorem is required to extend to $4/p$.** |
+| 22-portal classification covers all tested $p^2$ | **22 A-values, max A=159** |
+| Zero failures at any scale | **10⁶: 7,825/7,825, 10⁷: 62,113/62,113, 10⁸: 289,372/289,372** |
 | Mean minimal m = 2.25 | Tightly bounded |
 | A=7 dominates at ~49.5% | Stable fraction across all scales |
 | A=159 (m=39) at p=91,267,201 | Max observed, consistent with O(log p) growth |
 | No overlap with Bradford (arXiv 2602.11774) solutions | 0.0% (y,z) agreement on shared n |
 | Squareful barrier: Bradford fails on ALL squareful n | Structural, not implementation artifact |
-| Xu (May 2026): 9 wild primes for m≤30,000 | **All 9 fall within 12-portal classification** |
+| Xu (May 2026): 9 wild primes for m≤30,000 | **All 9 fall within 12-portal classification (for $4/p^2$)** |
 
 **The 22 A-values (the "12 portals" plus higher terms):** 7, 11, 15, 19, 23, 31, 39, 43, 47, 51, 59, 67, 71, 79, 83, 87, 95, 103, 107, 111, 127, 159
 
@@ -64,7 +64,7 @@ The sieve partitions work deterministically: same seed + same survivor list = sa
 ```bash
 git clone https://github.com/COMMENCINGTHESCOURGE/erdos-straus-solver.git
 cd erdos-straus-solver
-python sieve_l40s_hot_corridor.py survivors.txt --threads 8
+python sieve_l40s_hot_corridor.py --v 2 --stride 24 --depth 200
 ```
 
 For distributed runs:

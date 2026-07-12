@@ -14,9 +14,14 @@ try:
     GPU = True
     print(f'CuPy on A100: {cp.cuda.runtime.getDeviceCount()} GPU(s)')
 except:
-    import numpy as cp
+    import numpy as np
+    class NumPyFallback:
+        def __getattr__(self, name):
+            if name == 'asnumpy':
+                return lambda x: np.array(x) if not isinstance(x, np.ndarray) else x
+            return getattr(np, name)
+    cp = NumPyFallback()
     GPU = False
-    cp.asnumpy = lambda x: np.array(x) if not isinstance(x, np.ndarray) else x
     print('CuPy unavailable — using NumPy CPU')
 
 CHUNK = 10_000_000

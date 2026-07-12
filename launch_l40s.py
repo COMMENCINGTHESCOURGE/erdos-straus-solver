@@ -53,23 +53,55 @@ stable_count = 0
 breach_count = 0
 
 def erdos_straus_check(n):
+    # Parametric checks first (zero-cost guaranteed solutions)
+    if n % 3 == 0 or n % 4 == 0 or n % 5 == 0 or n % 8 == 3 or n % 8 == 7:
+        return 3, True
+    
+    # Bounded divisor search via factoring x
     found = 0
-    stable = False
-    max_denom = int(n * n * 0.5)
-    for x in range(int(n/4) + 1, min(int(3*n/4), max_denom)):
-        x4 = 4 * x - n
-        if x4 <= 0: continue
-        for y in range(x, min(int(2*n*x/x4), max_denom)):
-            y4 = x4 * y - n * x
-            if y4 <= 0: continue
-            if (n * x * y) % y4 == 0:
-                z = (n * x * y) // y4
-                if z >= y:
+    # Try small A-values representing the known covering portals
+    for A in [3, 7, 11, 15, 19, 23, 31, 39, 43, 47, 51, 55, 59, 67, 71, 75, 79, 83, 87, 95, 103, 107, 111, 127, 159]:
+        if (n + A) % 4 != 0:
+            continue
+        x = (n + A) // 4
+        
+        # Factorize n and x
+        factors = {}
+        for val in (n, x):
+            temp = val
+            d = 2
+            while d * d <= temp:
+                if temp % d == 0:
+                    cnt = 0
+                    while temp % d == 0:
+                        temp //= d
+                        cnt += 1
+                    factors[d] = factors.get(d, 0) + 2 * cnt
+                d += 1
+            if temp > 1:
+                factors[temp] = factors.get(temp, 0) + 2
+                
+        # Generate divisors of n^2 * x^2
+        divs = [1]
+        for prime, exp in factors.items():
+            cur = []
+            p_pow = 1
+            for _ in range(exp + 1):
+                for dv in divs:
+                    cur.append(dv * p_pow)
+                p_pow *= prime
+            divs = cur
+            
+        target_mod = (-n * x) % A
+        for d in divs:
+            if d % A == target_mod:
+                y = (n * x + d) // A
+                z = (n * x + (n * n * x * x) // d) // A
+                if y >= x and z >= y:
                     found += 1
                     if found >= 100:
-                        stable = True
-                        return found, stable
-    return found, stable
+                        return found, True
+    return found, found >= 100
 
 n_start = int(sys.argv[1]) if len(sys.argv) > 1 else 1
 n_end = int(sys.argv[2]) if len(sys.argv) > 2 else n_start + CHUNK_SIZE

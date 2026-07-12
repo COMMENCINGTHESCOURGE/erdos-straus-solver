@@ -27,10 +27,8 @@ def get_deepseek_key():
     return None
 
 def verify_solution(n, x, y, z):
-    """Verify 4/n = 1/x + 1/y + 1/z"""
-    left = 4.0 / n
-    right = 1.0/x + 1.0/y + 1.0/z
-    return abs(left - right) < 1e-12
+    """Verify 4/n = 1/x + 1/y + 1/z via exact integer arithmetic"""
+    return 4 * x * y * z == n * (y * z + x * z + x * y)
 
 def ask_deepseek(n, api_key):
     """Ask DeepSeek to reason about a found solution."""

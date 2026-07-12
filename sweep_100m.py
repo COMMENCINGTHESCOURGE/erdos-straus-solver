@@ -127,16 +127,33 @@ def check_A(p, A):
     return False, None
 
 def find_min_A(p, max_m=200):
-    # All 22 known valid A-values (ascending)
+    """Find the minimal A = 4m+3 such that check_A(p, A) succeeds.
+
+    IMPORTANT: This uses strict ascending enumeration to guarantee minimality.
+    The search tests A = 3, 7, 11, 15, 19, ... in order and returns the first
+    hit. This is the only correct implementation for minimality experiments.
+    """
+    for m in range(max_m):
+        A = 4 * m + 3
+        ok, info = check_A(p, A)
+        if ok:
+            return info
+    return None
+
+def find_any_A(p, max_m=200):
+    """Fast existence check using the 22 known valid A-values first.
+
+    NOT suitable for minimality experiments — use find_min_A instead.
+    This accelerates existence-only sweeps by testing high-probability
+    values before falling back to exhaustive search.
+    """
     known_A = [7, 11, 15, 19, 23, 31, 39, 43, 47, 51, 59, 67, 71,
                79, 83, 87, 95, 103, 107, 111, 127, 159]
     known_set = set(known_A)
-    # Phase 1: scan known valid values in ascending order
     for A in known_A:
         ok, info = check_A(p, A)
         if ok:
             return info
-    # Phase 2: scan remaining m candidates in ascending order
     for m in range(max_m):
         A = 4 * m + 3
         if A in known_set:
@@ -154,11 +171,11 @@ def is_exceptional(p):
             return False
     return True
 
-# ---------- Main (only runs when executed directly) ----------
-if __name__ != '__main__':
-    # When imported, just set up small primes and return
-    init_small_primes(5000000)
-else:
+# ---------- Main ----------
+def main():
+    """Run the full exceptional-prime sweep to 10^8."""
+    from collections import Counter
+
     init_small_primes(5000000)
     print(f"Small primes: {len(SMALL_PRIMES)} up to {PRIME_LIMIT}")
 
@@ -177,60 +194,65 @@ else:
             is_p[start:MAX_P+1:step] = b'\x00' * ((MAX_P - start) // step + 1)
     print(f"  Sieve done in {time.perf_counter()-t0:.1f}s")
 
-# Scan
-results = []
-count = 0
-failed = 0
-max_m = 0
-sum_m = 0
-sieve_check_count = 0
+    # Scan
+    results = []
+    count = 0
+    failed = 0
+    max_m = 0
+    sum_m = 0
 
-for p in range(13, MAX_P + 1, 12):
-    if not is_p[p]:
-        continue
-    if not is_exceptional(p):
-        continue
-    
-    count += 1
-    info = find_min_A(p, max_m=200)
-    if info is None:
-        failed += 1
-        print(f"  FAILED p={p}")
-    else:
-        m = (info["A"] - 3) // 4
-        if m > max_m:
-            max_m = m
-            print(f"  NEW MAX m={m} at p={p}, A={info['A']}")
-        sum_m += m
-        results.append({"p": p, "A": info["A"], "m": m})
-    
-    if count % 2000 == 0:
-        elapsed = time.perf_counter() - t0
-        rate = count / elapsed if elapsed > 0 else 0
-        mean_m = sum_m / count if count > 0 else 0
-        print(f"  [{count}] rate={rate:.0f}/s, solved={count-failed}, max_m={max_m}, mean_m={mean_m:.2f}, p={p}")
+    for p in range(13, MAX_P + 1, 12):
+        if not is_p[p]:
+            continue
+        if not is_exceptional(p):
+            continue
 
-elapsed = time.perf_counter() - t0
-print(f"\n=== COMPLETE ===")
-print(f"Scanned {count} exceptional primes in {elapsed:.1f}s")
-print(f"Solved: {count - failed}/{count}")
-print(f"Failed: {failed}")
-print(f"Max minimal m: {max_m}")
-print(f"Mean minimal m: {sum_m / count:.2f}")
+        count += 1
+        info = find_min_A(p, max_m=200)
+        if info is None:
+            failed += 1
+            print(f"  FAILED p={p}")
+        else:
+            m = (info["A"] - 3) // 4
+            if m > max_m:
+                max_m = m
+                print(f"  NEW MAX m={m} at p={p}, A={info['A']}")
+            sum_m += m
+            results.append({"p": p, "A": info["A"], "m": m})
 
-from collections import Counter
-m_dist = Counter()
-A_dist = Counter()
-for r in results:
-    m_dist[r["m"]] += 1
-    A_dist[r["A"]] += 1
+        if count % 2000 == 0:
+            elapsed = time.perf_counter() - t0
+            rate = count / elapsed if elapsed > 0 else 0
+            mean_m = sum_m / count if count > 0 else 0
+            print(f"  [{count}] rate={rate:.0f}/s, solved={count-failed}, max_m={max_m}, mean_m={mean_m:.2f}, p={p}")
 
-print(f"\nDistribution by m (A = 4m+3):")
-for m_val in sorted(m_dist):
-    A_val = 4 * m_val + 3
-    pct = m_dist[m_val] / count * 100
-    print(f"  m={m_val:3d} (A={A_val:3d}): {m_dist[m_val]:6d} ({pct:.2f}%)")
+    elapsed = time.perf_counter() - t0
+    print(f"\n=== COMPLETE ===")
+    print(f"Scanned {count} exceptional primes in {elapsed:.1f}s")
+    print(f"Solved: {count - failed}/{count}")
+    print(f"Failed: {failed}")
+    print(f"Max minimal m: {max_m}")
+    print(f"Mean minimal m: {sum_m / count:.2f}")
 
-print(f"\nHighest minimal m values:")
-for r in sorted(results, key=lambda x: -x["m"])[:30]:
-    print(f"  p={r['p']:9d}, A={r['A']:3d}, m={r['m']:3d}")
+    m_dist = Counter()
+    A_dist = Counter()
+    for r in results:
+        m_dist[r["m"]] += 1
+        A_dist[r["A"]] += 1
+
+    print(f"\nDistribution by m (A = 4m+3):")
+    for m_val in sorted(m_dist):
+        A_val = 4 * m_val + 3
+        pct = m_dist[m_val] / count * 100
+        print(f"  m={m_val:3d} (A={A_val:3d}): {m_dist[m_val]:6d} ({pct:.2f}%)")
+
+    print(f"\nHighest minimal m values:")
+    for r in sorted(results, key=lambda x: -x["m"])[:30]:
+        print(f"  p={r['p']:9d}, A={r['A']:3d}, m={r['m']:3d}")
+
+if __name__ != '__main__':
+    # When imported, just set up small primes
+    init_small_primes(5000000)
+else:
+    main()
+

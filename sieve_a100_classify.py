@@ -1,13 +1,13 @@
 #!/usr/bin/env python
-"""ERDOS CLASSIFIER — A100 with embedded data"""
+"""ERDOS CLASSIFIER — Analysis tool for existing sieve dataset"""
 import json, time, math
 from datetime import datetime
 from collections import Counter
 
 print('=' * 50)
-print('ERDOS CLASSIFIER — A100 Propelling Existing Data')
+print('ERDOS CLASSIFIER — Embedded Sieve Data Analysis')
 print(f'Start: {datetime.now().isoformat()}')
-print('GPU: A100 — 40GB VRAM')
+print('System: CPU Analysis Mode')
 print('=' * 50)
 
 # Embedded from KAGGLE_OUTPUT_RECORD.jsonl (May 17, 2026)
@@ -29,6 +29,7 @@ def deep_classify(n):
     return {'n':n,'mod9':mod9,'mod24':mod24,'depth':depth,
             'torsion_log':round(torsion,2)}
 
+start = time.time()
 results = []
 stable = breach = neutral = 0
 mod24_counts = Counter()
@@ -49,7 +50,7 @@ print(f'Total: {len(results)} solutions')
 print(f'STABLE: {stable} ({stable/max(1,len(results))*100:.1f}%)')
 print(f'BREACH: {breach} ({breach/max(1,len(results))*100:.1f}%)')
 print(f'NEUTRAL: {neutral}')
-print(f'Runtime: {time.time() - start:.2f}s' if 'start' in dir() else '')
+print(f'Runtime: {time.time() - start:.2f}s')
 
 print()
 print('Mod9 distribution:')
