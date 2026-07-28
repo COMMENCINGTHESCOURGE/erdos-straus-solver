@@ -1,0 +1,36 @@
+=========================================================
+ INITIALIZING H100 GEOLOGICAL EROSION TRAINING PIPELINE 
+=========================================================
+Generating Sifter coordinates and resolving unit fractions...
+Using device: cuda, accelerator: cuda, precision: bf16-mixed
+Using bfloat16 Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+Fitting Geological Erosion model to Sifter topological target...
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/pytorch_lightning/utilities/model_summary/model_summary.py:242: Precision bf16-mixed is not supported by the model summary.  Estimated model size in MB will not be accurate. Using 32 bits instead.
+┏━━━┳━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┓
+┃   ┃ Name    ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃
+┡━━━╇━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━┩
+│ 0 │ network │ Sequential │  8.4 M │ train │     0 │
+└───┴─────────┴────────────┴────────┴───────┴───────┘
+Trainable params: 8.4 M                                                         
+Non-trainable params: 0                                                         
+Total params: 8.4 M                                                             
+Total estimated model params size (MB): 33.604                                  
+Modules in train mode: 8                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 0                                                                  
+/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:434: The 'val_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=25` in the `DataLoader` to improve performance.
+/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:434: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=25` in the `DataLoader` to improve performance.
+Swapping scheduler `CosineAnnealingLR` for `SWALR`
+`Trainer.fit` stopped: `max_epochs=20` reached.
+Epoch 19/19 ━━━━━━━━━━━━━━━━ 10/10 0:00:00 • 0:00:00 32.20it/s v_num: 1.000     
+                                                               train_loss:      
+                                                               39.314 val_loss: 
+                                                               25.603           
+Executing monolithic 8K generation pass...
+Normalizing spatial mass...
+Exporting raw 32-bit float array to out/loss_landscape_8k.bin...
+Generation complete. The geological asset is ready for ingestion.

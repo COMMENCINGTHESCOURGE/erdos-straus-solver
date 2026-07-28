@@ -1,0 +1,35 @@
+=========================================================
+ INITIALIZING V6 GEOLOGICAL EROSION TRAINING PIPELINE 
+=========================================================
+Generating Sifter coordinates and resolving unit fractions...
+DataLoader workers: 16
+Compiling network topology via torch.compile(backend='inductor')...
+H200 Target Device: cuda, Accelerator: cuda, Precision: bf16-mixed
+Using bfloat16 Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+Fitting Geological Erosion model to Sifter topological target...
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/zeus/miniconda3/envs/cloudspace/lib/python3.12/site-packages/pytorch_lightning/utilities/model_summary/model_summary.py:242: Precision bf16-mixed is not supported by the model summary.  Estimated model size in MB will not be accurate. Using 32 bits instead.
+┏━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┓
+┃   ┃ Name    ┃ Type            ┃ Params ┃ Mode  ┃ FLOPs ┃
+┡━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━┩
+│ 0 │ network │ OptimizedModule │ 50.4 M │ train │     0 │
+└───┴─────────┴─────────────────┴────────┴───────┴───────┘
+Trainable params: 50.4 M                                                        
+Non-trainable params: 0                                                         
+Total params: 50.4 M                                                            
+Total estimated model params size (MB): 201.441                                 
+Modules in train mode: 11                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 0                                                                  
+Swapping scheduler `CosineAnnealingLR` for `SWALR`
+`Trainer.fit` stopped: `max_epochs=30` reached.
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 21/21 0:00:00 •        163.83it/s v_num: 9.000     
+                                   0:00:00                     train_loss: 2.332
+                                                               val_loss: 1.968  
+Executing monolithic 16K generation pass on H200 layout...
+Normalizing spatial mass...
+Exporting raw 32-bit float array to out/loss_landscape_v6_16k.bin...
+Generation complete. The 16K geological asset is ready for ingestion.
