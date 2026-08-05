@@ -1,0 +1,3 @@
+# Ray-only minimal runtime dependency for erdos-straus-solver
+# Start with CPU-only Ray. To add GPU support later, install cupy or other GPU libs as needed.
+ray[default]>=2.10.0
