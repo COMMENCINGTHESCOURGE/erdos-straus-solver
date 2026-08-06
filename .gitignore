@@ -1,5 +1,1 @@
-__pycache__/
-*.pyc
-.pytest_cache/
-v113_quantum_flank_31.ipynb
-kernel-metadata.json
+Nothing should be ignored based on the provided file changes. The changes only include a markdown file (PERFORMANCE_OPTIMIZATIONS.md) and a Python source file (v113_quantum_flank_31.py), which are both source/config files that should not be ignored.
