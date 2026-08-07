@@ -1,0 +1,25 @@
+{
+  "coverage_type": "continuous",
+  "interval": {
+    "start": 2,
+    "end": 1000000000
+  },
+  "exceptions": [],
+  "theorem_basis": ["mod24_exclusion"],
+  "verified_interval": {
+    "start_inclusive": 2,
+    "end_inclusive": 1000000000
+  },
+  "witness_merkle_root": "sha256:fd9a1b60e84ff768d100aa6700563b8eb91bac5805771ad39537cadb77d69a6d",
+  "total_witnesses": 2529425,
+  "shard_proofs": [
+    {
+      "shard_id": "worker_01_of_01",
+      "assigned_interval": {"start": 2, "end": 1000000000},
+      "input_survivors_merkle": "sha256:<sha256-of-exact-release-asset>",
+      "output_witnesses_merkle": "sha256:fd9a1b60e84ff768d100aa6700563b8eb91bac5805771ad39537cadb77d69a6d",
+      "execution_log_hash": "sha256:fd9a1b60e84ff768d100aa6700563b8eb91bac5805771ad39537cadb77d69a6d",
+      "verification_status": "self_verified"
+    }
+  ]
+}

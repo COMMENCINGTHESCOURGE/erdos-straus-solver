@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://guineapigtrench.com/schemas/erdos-straus-claims.json",
+  "title": "Erdős–Straus Verification Claims",
+  "description": "Schema for verified interval claims and witness commitments",
+  "type": "object",
+  "required": ["claim_type", "value", "evidence_commitment"],
+  "properties": {
+    "claim_type": {
+      "type": "string",
+      "enum": ["upper_bound", "interval_coverage", "witness_count", "survivor_rate"]
+    },
+    "value": {
+      "type": "number",
+      "minimum": 2
+    },
+    "evidence_commitment": {
+      "type": "object",
+      "required": ["merkle_root", "witness_count"],
+      "properties": {
+        "merkle_root": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "witness_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "checkpoint_hashes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          }
+        }
+      }
+    },
+    "coverage_type": {
+      "type": "string",
+      "enum": ["continuous", "sparse"]
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {"type": "number"},
+      "description": "Must be empty if coverage_type is 'continuous'"
+    },
+    "verified_interval": {
+      "type": "object",
+      "required": ["start_inclusive", "end_inclusive"],
+      "properties": {
+        "start_inclusive": {"type": "number", "minimum": 2},
+        "end_inclusive": {"type": "number", "minimum": 2}
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "verifier_signature": {
+      "type": "string",
+      "description": "Base64-encoded signature over canonicalized claim JSON"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"coverage_type": {"const": "continuous"}}
+      },
+      "then": {
+        "properties": {
+          "exceptions": {
+            "type": "array",
+            "maxItems": 0
+          }
+        }
+      }
+    }
+  ]
+}
