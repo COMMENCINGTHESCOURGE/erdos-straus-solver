@@ -6,5 +6,6 @@
   "kernel_type": "notebook",
   "is_private": false,
   "enable_gpu": true,
+  "accelerator": "NvidiaTeslaP100",
   "enable_internet": false
 }

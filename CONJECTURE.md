@@ -1,5 +1,7 @@
 # The Factorization Separation Conjecture
 
+> **Framing Note (July 2026):** The following theorems and empirical evidence provide a deterministic, geometric blueprint for the prime-square equation ($4/p^2$). While this identifies the structural 22-portal classification, an analytic **descent theorem** is still required to bridge these solutions back to the original Erdős-Straus conjecture ($4/p$). This document serves as vital theoretical scaffolding, not a universal analytic proof.
+
 ## Statement
 
 For all `n ≡ 1 (mod 24)` in the tested range `[25, 10000]`:
@@ -16,7 +18,7 @@ Then:
 ## Measured Evidence (n = 1 mod 24, ≤10K, 416 values)
 
 | Property | Value | Sample |
-|---|---|---|
+| --- | --- | --- |
 | Shared n coverage | 92.3% (384/416) | — |
 | Shared (x,y,z) coverage | **0.0%** (0/384) | — |
 | Canonicalization artifact rate | 0.0% | Sorted triples never match |
@@ -29,7 +31,7 @@ Then:
 Several possible explanations were ruled out:
 
 | Hypothesized invariant | Result |
-|---|---|
+| --- | --- |
 | Solvers agree on x, differ on (y,z) | **False** — x differs in 99.5% of cases |
 | Sorting (y,z) resolves disagreement | **False** — 0.0% artifact rate |
 | Unsolved cases are a third family | **False** — Omega solves all with deeper search |
@@ -42,10 +44,10 @@ Several possible explanations were ruled out:
 The two solvers produce **orthogonal factorizations** of the same rational `4/n`. They are orthogonal in the sense that:
 
 - Both express `4/n` as `1/x + 1/y + 1/z` with integer `x,y,z`
-- Both search over `A = 4m+3` 
+- Both search over `A = 4m+3`
 - But the algebraic path from `(n, A)` to `(x,y,z)` is fundamentally different:
 
-```
+```text
 Omega:   (n, A) → x = (n+A)/4 → d|x, d≡-nx mod A → y,z from (nx+d)/A, (nx+(nx)^2/d)/A
 Bradford: (n, A) → (k, ell) → x,y,z from parametric lemma with congruence filter
 ```
@@ -57,6 +59,7 @@ The Omega path uses **divisor structure** of `x`. The Bradford path uses **modul
 Bradford's lemmas require a prime factor with exponent exactly 1 to seed the parametric congruence. When `n` is **squareful** (every prime exponent ≥ 2), no such seed exists and Bradford fails unconditionally at all tested `(k, ell)` depths.
 
 A number is squareful (powerful) iff for every prime `p|n`, `p²|n`. Examples:
+
 - `n = p²` (e.g., 25, 49, 5329)
 - `n = p⁴` (e.g., 625, 2401)
 - `n = p²·q²` (e.g., 1225 = 5²·7², 3025 = 5²·11²)
@@ -64,7 +67,7 @@ A number is squareful (powerful) iff for every prime `p|n`, `p²|n`. Examples:
 Confirmed at h=200, k=500 across all n = 1 mod 24 up to 10⁶:
 
 | Range | Total | Squareful | Bradford fails on non-squareful | Omega fails on squareful |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | ≤ 10K | 416 | 32 | 0 | 0 |
 | ≤ 50K | 2,083 | 74 | 0 | 0 |
 | ≤ 100K | 4,166 | 104 | 0 | 0 |
@@ -75,7 +78,7 @@ The squareful barrier is universal across all tested ranges — Bradford fails e
 
 ## Resolved: The Omega Gap Was a Constraint Bug
 
-The single Bradford-only case (n=2521) was not a genuine Omega gap — it was caused by an overly restrictive constraint `d | x` in the Omega solver. The correct mathematical condition is `d | nx²`. 
+The single Bradford-only case (n=2521) was not a genuine Omega gap — it was caused by an overly restrictive constraint `d | x` in the Omega solver. The correct mathematical condition is `d | nx²`.
 
 The original constraint `d | x` assumed the divisor `d` derived from `y = (nx+d)/A` must divide `x`. For n=2521, the correct `d` satisfies `d ≡ -nx mod A` and `d | nx²`, but `d ∤ x`. Example: x=652, d=1304=2x, d∤x but d|nx². After fixing to check `d | nx²`, all 416 values are solvable by Omega at h≤200.
 
@@ -86,7 +89,7 @@ This also proves: Omega's algebraic path (divisor search) is NOT inherently rest
 A brute-force first-found solver (enumerate x ascending, then y ascending) was tested against Omega and Bradford across 69 shared n values up to 2000:
 
 | Disjoint from | Rate |
-|---|---|
+| --- | --- |
 | Bradford | 100.0% (69/69) |
 | Omega | 49.3% (34/69) |
 | Both | 49.3% (34/69) |
@@ -100,17 +103,22 @@ For `n = p²` (prime square), the Erdos-Straus equation `4/p² = 1/x + 1/y + 1/z
 Choose `A ≡ 3 (mod 4)`. Set `x = (p² + A)/4`. The remaining sum `R = 4A / (p²(p²+A))` must split into two unit fractions.
 
 ### Tier 1 (p ≡ 3 mod 4)
+
 `A = p` works universally: `x = p(p+3)/4`, and the split follows from `c = (p+3)/4` dividing `p² + p`.
+
 - Verified: all 49 primes p ≡ 3 mod 4 up to 500.
 
 ### Tier 2 (p ≡ 1 mod 4, c = (p+3)/4 has a divisor ≡ 2 mod 3)
+
 `A = 3p` works: `x = p(p+3)/4`, and the divisor `d = p·c²` satisfies the Omega congruence.
+
 - Verified: all 22 such primes up to 500.
 
 ### Tier 3 (p ≡ 1 mod 12, c has NO divisor ≡ 2 mod 3)
+
 `A` ranges over a bounded set `{7, 11, 15, 19, 23, 31, 39, 43, 47, 51, 59, 67, 71, 79, 83, 87, 95, 103, 107, 111, 127, 159}`. The minimal working `A` is determined by a modular decision tree rooted at `p mod 7`:
 
-```
+```text
 p mod 7 ∈ {3, 5, 6} → A = 7   (49.47%)
 p mod 7 ∈ {1, 2, 4}:
   p mod 11 ∈ {2, 6, 7, 10} → A = 11   (22.55%)
@@ -127,7 +135,7 @@ p mod 7 ∈ {1, 2, 4}:
 **10K scale (all n ≡ 1 mod 24):**
 
 | A | m | Count (10K) | % |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 3 | 0 | 275 | 66.1% |
 | 7 | 1 | 122 | 29.3% |
 | 11 | 2 | 12 | 2.9% |
@@ -137,7 +145,7 @@ p mod 7 ∈ {1, 2, 4}:
 **Debiased empirical results through 10⁸ (exceptional primes only):**
 
 | A | m | Count (10⁸) | % | Trend from 10⁷ |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 7 | 1 | 143,145 | 49.47% | Stable ~50% |
 | 11 | 2 | 65,251 | 22.55% | Stable ~22.5% |
 | 15 | 3 | 27,112 | 9.37% | Stable ~9.5% |
@@ -168,6 +176,7 @@ p mod 7 ∈ {1, 2, 4}:
 ## Open Questions
 
 ### Open Descent Problem: From (4/p^2) to (4/p)
+
 The current experiment strictly proves decompositions for the tested exceptional-prime-indexed prime squares ($4/p^2 = 1/x + 1/y + 1/z$) where $x = (p^2 + A)/4$. It does **not** establish the original conjecture ($4/p = 1/x + 1/y + 1/z$) for those primes unless a valid descent construction is supplied. A descent theorem establishing that solvability of $4/p^2$ implies solvability of $4/p$ (or providing a direct map between their shift parameters) remains an open problem. Until such a theorem is proved, the additive-shift results apply only to the prime-square case.
 
 ### Additional Questions

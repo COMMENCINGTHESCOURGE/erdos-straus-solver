@@ -109,35 +109,21 @@ def run_local_victus():
         return None
 
 def try_kaggle_push():
-    """Attempt Kaggle kernel push via CLI (may fail)."""
-    print("[kaggle_t4] Attempting kernel push...")
+    """Attempt Kaggle kernel push via Python SDK."""
+    print("[kaggle_t4] Attempting kernel push via Python SDK...")
     try:
-        # Pre-flight: dry-run to catch metadata/auth errors without interactive hang
-        dry = subprocess.run(
-            ["kaggle", "kernels", "push", "--dry-run"],
-            capture_output=True, text=True, timeout=30,
-            cwd=str(BASE)
-        )
-        if dry.returncode != 0:
-            print(f"  ✗ Dry-run failed: {dry.stderr[:200]}")
-            if "403" in dry.stderr or "401" in dry.stderr:
-                print("    → Auth error: check KAGGLE_API_TOKEN")
-            elif "metadata" in dry.stderr.lower():
-                print("    → Metadata error: check kernel-metadata.json")
-            return False
-        result = subprocess.run(
-            ["kaggle", "kernels", "push"],
-            capture_output=True, text=True, timeout=30,
-            cwd=str(BASE)
-        )
-        if result.returncode == 0:
-            print("  ✓ Kernel pushed to Kaggle")
-            return True
-        else:
-            print(f"  ✗ Push failed: {result.stderr[:100]}")
-            return False
-    except (FileNotFoundError, subprocess.TimeoutExpired):
-        print("  ✗ Kaggle CLI not available")
+        from kaggle.api.kaggle_api_extended import KaggleApi
+        api = KaggleApi()
+        api.authenticate()
+        
+        api.kernels_push(str(BASE))
+        print("  ✓ Kernel pushed to Kaggle via SDK")
+        return True
+    except ImportError:
+        print("  ✗ kaggle python package not installed. Run: pip install kaggle")
+        return False
+    except Exception as e:
+        print(f"  ✗ Push failed via SDK: {e}")
         return False
 
 def try_lightning_launch():

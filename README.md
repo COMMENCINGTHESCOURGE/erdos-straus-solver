@@ -17,15 +17,11 @@ This is the vinculum operating on integers instead of fields — same algebraic 
 ## 🏆 Key Results (Verified July 2026)
 
 | Claim | Status |
-|-------|--------|
+| --- | --- |
 | **Sieve existence check** | **Computational run through ~8.00e13 (80 trillion) on Kaggle; zero survivors. Literature has reached 1e17-1e18 for plain existence checks. The novel contribution is the 22-portal classification at 1e8 -- see EMPIRICAL_NOTE.md.** |
 | All tested exceptional-prime-indexed prime squares ($p^2$) solved | **289,372/289,372 up to 10⁸ (100%). Note: solutions are for $4/p^2$, not $4/p$. A descent theorem is required to extend to $4/p$.** |
 | 22-portal classification covers all tested $p^2$ | **22 A-values, max A=159** |
-| Zero failures at any scale | <!-- ZERO_FAILURES_START -->
-
-**10⁶: 4540/4540, 10⁷: 35750/35750, 10⁸: 289372/289372**
-
-<!-- ZERO_FAILURES_END --> |
+| Zero failures at any scale | <!-- ZERO_FAILURES_START --> **10⁶: 4540/4540, 10⁷: 35750/35750, 10⁸: 289372/289372** <!-- ZERO_FAILURES_END --> |
 | Mean minimal m = 2.25 | Tightly bounded |
 | A=7 dominates at ~49.5% | Stable fraction across all scales |
 | A=159 (m=39) at p=91,267,201 | Max observed, consistent with O(log p) growth |
@@ -36,10 +32,17 @@ This is the vinculum operating on integers instead of fields — same algebraic 
 **The 22 A-values (the "12 portals" plus higher terms):** 7, 11, 15, 19, 23, 31, 39, 43, 47, 51, 59, 67, 71, 79, 83, 87, 95, 103, 107, 111, 127, 159
 
 **OEIS Submission:** Prepared — ready for submission to oeis.org/Submit
-  - Data file: `oeis_a_values_data.txt` (distribution counts)
-  - b-file: `oeis_b_file.txt` (22 distinct A-values)
-  - b-file: `bfile_exceptional_1000.txt` (A per exceptional prime, first 1000)
-  - Generator: `gen_oeis_bfile.py` (produces b-file for N exceptional primes)
+
+- Data file: `oeis_a_values_data.txt` (distribution counts)
+- b-file: `oeis_b_file.txt` (22 distinct A-values)
+- b-file: `bfile_exceptional_1000.txt` (A per exceptional prime, first 1000)
+- Generator: `gen_oeis_bfile.py` (produces b-file for N exceptional primes)
+
+## State of the Art & AI Baseline (2026)
+
+This project is explicitly anchored against the 2026 AI mathematics wave. While autonomous reasoning models (e.g., GPT-5.2 paired with Lean/Aristotle) have successfully cleared hundreds of "long-tail" or neglected Erdős problems, they structurally fail at frontier, open-ended research.
+
+Because the Erdős-Straus conjecture is a frontier problem, it breaks zero-shot AI provers. Therefore, this repository uses a **hybrid architecture**: AI models provide the theoretical scaffolding and write the hyper-optimized C/Python sieves, while deterministic GPU clusters (like Kaggle P100s) map the prime geometry. This repository provides the **empirical geometric blueprint** and vital theoretical scaffolding for the $4/p^2$ domain, strictly separated from the analytic **descent theorem** required to fully bridge solutions to $4/p$.
 
 ## Architecture
 
@@ -54,7 +57,7 @@ The sieve partitions work deterministically: same seed + same survivor list = sa
 ### Components
 
 | File | Purpose |
-|------|---------|
+| --- | --- |
 | `sieve_l40s_hot_corridor.py` | Primary sieve runner — stride-24, hot corridor targeting |
 | `master_orchestrator.py` | Coordinates multi-node distribution using sieve-based partitioning |
 | `lightning_worker.py` | Remote compute worker for distributed runs |
@@ -72,6 +75,7 @@ python sieve_l40s_hot_corridor.py --v 2 --stride 24 --depth 200
 ```
 
 For distributed runs:
+
 ```bash
 # Orchestrator node
 python master_orchestrator.py --seed 42 --nodes 3
@@ -89,7 +93,7 @@ The solver includes a self-verification mode that validates every discovered sol
 Every measurement in this system is a vinculum:
 
 | Ratio | What it measures |
-|-------|-----------------|
+| --- | --- |
 | solutions / search space | Discovery progress |
 | stride width / n | Corridor efficiency |
 | verified / total | Solution quality |
@@ -108,7 +112,7 @@ Same vinculum operator, applied to integers instead of GPU fields.
 ## Entity
 
 | Field | Value |
-|-------|-------|
+| --- | --- |
 | Lead R&D | DaShawn (African American Developer & Mathematician) |
 | Copyright | Guinea Pig Trench LLC |
 | R&D Entity | Guinea Pig Trench LLC (PA, #13674084) |
