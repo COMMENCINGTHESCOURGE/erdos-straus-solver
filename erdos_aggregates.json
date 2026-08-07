@@ -1,0 +1,33 @@
+{
+  "summary": {
+    "total_solutions": 2529425,
+    "unique_n": 2529425,
+    "breach": 1000,
+    "stable": 0,
+    "breach_rate": 100.0,
+    "n_range": [2, 1000000000],
+    "last_updated": "2026-06-27T16:20:38.812451",
+    "coverage_pct": 0.2529,
+    "chunk_size": 1000000,
+    "total_chunks": 1000,
+    "mod24_classes": [1, 5, 7, 9, 11, 13, 17, 19, 23],
+    "samples_per_mod24_class_per_chunk": 300,
+    "mod24_9_corridor": {
+      "solved": 300000,
+      "unique_n": 300000,
+      "status": "CORRIDOR_BREACHED",
+      "solutions": 300000,
+      "breach_flag": true
+    }
+  },
+  "flank": 31,
+  "version": "v113",
+  "engine": "v113_quantum_flank_31",
+  "axiom": "STATUTORY_SIEVE_v3",
+  "hash": "fd9a1b60e84ff768d100aa6700563b8eb91bac5805771ad39537cadb77d69a6d",
+  "elapsed_s": 146.73,
+  "run_count": 29,
+  "mod24_mod9_heatmap": {
+    "mod24_corridor_note": "mod24=9 fully breached: 300000/300000 solved, 0 vacancies across range 2-1B. All 1000 chunks in BREACH state (0 STABLE). Deterministic output (hash fd9a1b60...). Latest run: 2026-06-27T16:20:38, 146.73s (local CPU)."
+  }
+}

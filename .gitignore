@@ -36,6 +36,9 @@ env/
 .pytest_cache/
 .ipynb_checkpoints/
 
+# Kaggle kernel metadata (regenerated per notebook)
+kernel-metadata.json
+
 # System specific files
 .DS_Store
 Thumbs.db

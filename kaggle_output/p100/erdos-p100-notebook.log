@@ -1,48 +1,144 @@
-[{"stream_name":"stderr","time":5.181630254,"data":"/usr/local/lib/python3.12/dist-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.\n"}
-,{"stream_name":"stderr","time":5.18168861,"data":"  validate(nb)\n"}
-,{"stream_name":"stderr","time":5.944114155,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
-,{"stream_name":"stderr","time":5.944167059,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
-,{"stream_name":"stderr","time":5.944171432,"data":"0.00s - to python to disable frozen modules.\n"}
-,{"stream_name":"stderr","time":5.944174877,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
-,{"stream_name":"stderr","time":6.535210099,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
-,{"stream_name":"stderr","time":6.535244423,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
-,{"stream_name":"stderr","time":6.535247783,"data":"0.00s - to python to disable frozen modules.\n"}
-,{"stream_name":"stderr","time":6.535250195,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
-,{"stream_name":"stdout","time":7.574523766,"data":"GPU: Tesla P100-PCIE-16GB\n"}
-,{"stream_name":"stdout","time":7.574575841,"data":"Start: 2026-05-20T15:46:45.323611\n"}
-,{"stream_name":"stdout","time":7.583898648,"data":"Target: mod24=0, mod9 in {0, 3, 6}\n"}
-,{"stream_name":"stdout","time":7.583930887,"data":"Chunk: 100,000,000 per run\n"}
-,{"stream_name":"stdout","time":7.597619106,"data":"Solver ready\n"}
-,{"stream_name":"stdout","time":7.608874187,"data":"Fresh start from n=32,000,000\n"}
-,{"stream_name":"stdout","time":7.608891377,"data":"Stride-24: 32,000,016 -\u003e 132,000,000 (4,166,666 candidates)\n"}
-,{"stream_name":"stdout","time":13.477645324,"data":"  [6.0%] n=37,999,992 | 250000 sols | S:0 B:250000 | 44517 cand/s\n"}
-,{"stream_name":"stdout","time":18.891790284,"data":"  [12.0%] n=43,999,992 | 500000 sols | S:0 B:500000 | 46142 cand/s\n"}
-,{"stream_name":"stdout","time":24.481547438,"data":"  [18.0%] n=49,999,992 | 750000 sols | S:0 B:750000 | 44530 cand/s\n"}
-,{"stream_name":"stdout","time":29.92103534,"data":"  [24.0%] n=55,999,992 | 1000000 sols | S:0 B:1000000 | 45972 cand/s\n"}
-,{"stream_name":"stdout","time":35.49952766,"data":"  [30.0%] n=61,999,992 | 1250000 sols | S:0 B:1250000 | 45036 cand/s\n"}
-,{"stream_name":"stdout","time":41.088116108,"data":"  [36.0%] n=67,999,992 | 1500000 sols | S:0 B:1500000 | 44759 cand/s\n"}
-,{"stream_name":"stdout","time":46.271586352,"data":"  [42.0%] n=73,999,992 | 1750000 sols | S:0 B:1750000 | 48079 cand/s\n"}
-,{"stream_name":"stdout","time":51.982517758,"data":"  [48.0%] n=79,999,992 | 2000000 sols | S:0 B:2000000 | 43828 cand/s\n"}
-,{"stream_name":"stdout","time":57.64555135,"data":"  [54.0%] n=85,999,992 | 2250000 sols | S:0 B:2250000 | 48601 cand/s\n"}
-,{"stream_name":"stdout","time":62.940824182,"data":"  [60.0%] n=91,999,992 | 2500000 sols | S:0 B:2500000 | 43065 cand/s\n"}
-,{"stream_name":"stdout","time":68.185169676,"data":"  [66.0%] n=97,999,992 | 2750000 sols | S:0 B:2750000 | 47679 cand/s\n"}
-,{"stream_name":"stdout","time":74.092382107,"data":"  [72.0%] n=103,999,992 | 3000000 sols | S:0 B:3000000 | 42348 cand/s\n"}
-,{"stream_name":"stdout","time":79.171955317,"data":"  [78.0%] n=109,999,992 | 3250000 sols | S:0 B:3250000 | 49001 cand/s\n"}
-,{"stream_name":"stdout","time":84.31573421,"data":"  [84.0%] n=115,999,992 | 3500000 sols | S:0 B:3500000 | 48815 cand/s\n"}
-,{"stream_name":"stdout","time":90.54207978,"data":"  [90.0%] n=121,999,992 | 3750000 sols | S:0 B:3750000 | 40163 cand/s\n"}
-,{"stream_name":"stdout","time":95.687731146,"data":"  [96.0%] n=127,999,992 | 4000000 sols | S:0 B:4000000 | 48452 cand/s\n"}
-,{"stream_name":"stdout","time":107.420776773,"data":"==================================================\n"}
-,{"stream_name":"stdout","time":107.420817219,"data":"ERDOS P100 DONE | 0.03h | 4,166,666 candidates | 4166666 sols (100.0%)\n"}
-,{"stream_name":"stdout","time":107.420821808,"data":"STABLE: 0 | BREACH: 4166666 | ANOMALIES: 0\n"}
-,{"stream_name":"stdout","time":107.420825204,"data":"Last n: 132,000,000\n"}
-,{"stream_name":"stdout","time":107.420828237,"data":"==================================================\n"}
-,{"stream_name":"stdout","time":107.42083173,"data":"{\"stable\": 0, \"breach\": 4166666, \"anomalies\": 0, \"total_solutions\": 4166666, \"candidates_checked\": 4166666, \"hit_rate_pct\": 100.0, \"last_n\": 132000000, \"runtime_h\": 0.03}\n"}
-,{"stream_name":"stderr","time":111.592455462,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
-,{"stream_name":"stderr","time":111.592486287,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
-,{"stream_name":"stderr","time":111.744258169,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
-,{"stream_name":"stderr","time":111.744287388,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
-,{"stream_name":"stderr","time":113.579093176,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
-,{"stream_name":"stderr","time":113.883110214,"data":"[NbConvertApp] Writing 13103 bytes to __notebook__.ipynb\n"}
-,{"stream_name":"stderr","time":116.251721189,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
-,{"stream_name":"stderr","time":117.061143589,"data":"[NbConvertApp] Writing 310929 bytes to __results__.html\n"}
+[{"stream_name":"stderr","time":5.656717366,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":5.6567669160000005,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/reader.py\", line 19, in parse_json\n"}
+,{"stream_name":"stderr","time":5.65700638,"data":"    nb_dict = json.loads(s, **kwargs)\n"}
+,{"stream_name":"stderr","time":5.657035828,"data":"              ^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":5.657045307,"data":"  File \"/usr/lib/python3.12/json/__init__.py\", line 346, in loads\n"}
+,{"stream_name":"stderr","time":5.65773269,"data":"    return _default_decoder.decode(s)\n"}
+,{"stream_name":"stderr","time":5.657746058,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":5.657754012,"data":"  File \"/usr/lib/python3.12/json/decoder.py\", line 338, in decode\n"}
+,{"stream_name":"stderr","time":5.658674586,"data":"    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n"}
+,{"stream_name":"stderr","time":5.65869177,"data":"               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":5.6586965110000005,"data":"  File \"/usr/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n"}
+,{"stream_name":"stderr","time":5.658912951,"data":"    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\n"}
+,{"stream_name":"stderr","time":5.658922217,"data":"json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n"}
+,{"stream_name":"stderr","time":5.658953494,"data":"\n"}
+,{"stream_name":"stderr","time":5.658958339,"data":"The above exception was the direct cause of the following exception:\n"}
+,{"stream_name":"stderr","time":5.658961946,"data":"\n"}
+,{"stream_name":"stderr","time":5.658965083,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":5.65897643,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":5.658981719,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/execute.py\", line 89, in execute_notebook\n"}
+,{"stream_name":"stderr","time":5.659202411,"data":"    nb = load_notebook_node(input_path)\n"}
+,{"stream_name":"stderr","time":5.659215297,"data":"         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":5.659219025,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/iorw.py\", line 499, in load_notebook_node\n"}
+,{"stream_name":"stderr","time":5.659420224,"data":"    nb = nbformat.reads(papermill_io.read(notebook_path), as_version=4)\n"}
+,{"stream_name":"stderr","time":5.65942939,"data":"         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":5.659433617,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/__init__.py\", line 92, in reads\n"}
+,{"stream_name":"stderr","time":5.660083738,"data":"    nb = reader.reads(s, **kwargs)\n"}
+,{"stream_name":"stderr","time":5.660098778,"data":"         ^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":5.660103014,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/reader.py\", line 75, in reads\n"}
+,{"stream_name":"stderr","time":5.660226028,"data":"    nb_dict = parse_json(s, **kwargs)\n"}
+,{"stream_name":"stderr","time":5.660241868,"data":"              ^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":5.660246406,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/reader.py\", line 25, in parse_json\n"}
+,{"stream_name":"stderr","time":5.660375823,"data":"    raise NotJSONError(message) from e\n"}
+,{"stream_name":"stderr","time":5.660384141,"data":"nbformat.reader.NotJSONError: Notebook does not appear to be JSON: '# ERDOS–STRAUS V113 — Quantum Flank 31 ...\n"}
+,{"stream_name":"stderr","time":7.810389399,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":7.8104453,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":7.989516393,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":7.989560792,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":8.605706157,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":8.605926078,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":8.605935998,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/reader.py\", line 19, in parse_json\n"}
+,{"stream_name":"stderr","time":8.606046658,"data":"    nb_dict = json.loads(s, **kwargs)\n"}
+,{"stream_name":"stderr","time":8.606733444,"data":"              ^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":8.606741392,"data":"  File \"/usr/lib/python3.12/json/__init__.py\", line 346, in loads\n"}
+,{"stream_name":"stderr","time":8.606745914,"data":"    return _default_decoder.decode(s)\n"}
+,{"stream_name":"stderr","time":8.606749878,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":8.606753697,"data":"  File \"/usr/lib/python3.12/json/decoder.py\", line 338, in decode\n"}
+,{"stream_name":"stderr","time":8.606761875,"data":"    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n"}
+,{"stream_name":"stderr","time":8.606764933000001,"data":"               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":8.606767486,"data":"  File \"/usr/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n"}
+,{"stream_name":"stderr","time":8.60677001,"data":"    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\n"}
+,{"stream_name":"stderr","time":8.606772417,"data":"json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n"}
+,{"stream_name":"stderr","time":8.60678833,"data":"\n"}
+,{"stream_name":"stderr","time":8.606792189,"data":"The above exception was the direct cause of the following exception:\n"}
+,{"stream_name":"stderr","time":8.606796303,"data":"\n"}
+,{"stream_name":"stderr","time":8.606799961,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":8.606804059,"data":"  File \"/usr/local/bin/jupyter-nbconvert\", line 10, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":8.606808597,"data":"    sys.exit(main())\n"}
+,{"stream_name":"stderr","time":8.606812031,"data":"             ^^^^^^\n"}
+,{"stream_name":"stderr","time":8.606815434,"data":"  File \"/usr/local/lib/python3.12/dist-packages/jupyter_core/application.py\", line 284, in launch_instance\n"}
+,{"stream_name":"stderr","time":8.607400401,"data":"    super().launch_instance(argv=argv, **kwargs)\n"}
+,{"stream_name":"stderr","time":8.607411279,"data":"  File \"/usr/local/lib/python3.12/dist-packages/traitlets/config/application.py\", line 1075, in launch_instance\n"}
+,{"stream_name":"stderr","time":8.607777556,"data":"    app.start()\n"}
+,{"stream_name":"stderr","time":8.607785296,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbconvert/nbconvertapp.py\", line 369, in start\n"}
+,{"stream_name":"stderr","time":8.60797041,"data":"    self.convert_notebooks()\n"}
+,{"stream_name":"stderr","time":8.607977555,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbconvert/nbconvertapp.py\", line 541, in convert_notebooks\n"}
+,{"stream_name":"stderr","time":8.60822708,"data":"    self.convert_single_notebook(notebook_filename)\n"}
+,{"stream_name":"stderr","time":8.608238843,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbconvert/nbconvertapp.py\", line 506, in convert_single_notebook\n"}
+,{"stream_name":"stderr","time":8.608501115,"data":"    output, resources = self.export_single_notebook(notebook_filename, resources, input_buffer=input_buffer)\n"}
+,{"stream_name":"stderr","time":8.608589215,"data":"                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":8.60859742,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbconvert/nbconvertapp.py\", line 435, in export_single_notebook\n"}
+,{"stream_name":"stderr","time":8.608802385,"data":"    output, resources = self.exporter.from_filename(notebook_filename, resources=resources)\n"}
+,{"stream_name":"stderr","time":8.608851007,"data":"                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":8.608856715,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbconvert/exporters/exporter.py\", line 190, in from_filename\n"}
+,{"stream_name":"stderr","time":8.609065522,"data":"    return self.from_file(f, resources=resources, **kw)\n"}
+,{"stream_name":"stderr","time":8.609089313,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":8.60909424,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbconvert/exporters/exporter.py\", line 208, in from_file\n"}
+,{"stream_name":"stderr","time":8.609241982,"data":"    return self.from_notebook_node(nbformat.read(file_stream, as_version=4), resources=resources, **kw)\n"}
+,{"stream_name":"stderr","time":8.609320553,"data":"                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":8.609329059,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/__init__.py\", line 174, in read\n"}
+,{"stream_name":"stderr","time":8.609435485,"data":"    return reads(buf, as_version, capture_validation_error, **kwargs)\n"}
+,{"stream_name":"stderr","time":8.609500825,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":8.609510348,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/__init__.py\", line 92, in reads\n"}
+,{"stream_name":"stderr","time":8.60959578,"data":"    nb = reader.reads(s, **kwargs)\n"}
+,{"stream_name":"stderr","time":8.609623148,"data":"         ^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":8.609627628,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/reader.py\", line 75, in reads\n"}
+,{"stream_name":"stderr","time":8.609733986,"data":"    nb_dict = parse_json(s, **kwargs)\n"}
+,{"stream_name":"stderr","time":8.609748742,"data":"              ^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":8.609753189,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/reader.py\", line 25, in parse_json\n"}
+,{"stream_name":"stderr","time":8.609849859,"data":"    raise NotJSONError(message) from e\n"}
+,{"stream_name":"stderr","time":8.609900635,"data":"nbformat.reader.NotJSONError: Notebook does not appear to be JSON: '# ERDOS–STRAUS V113 — Quantum Flank 31 ...\n"}
+,{"stream_name":"stderr","time":11.175489917,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":11.175569853,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":11.175592588,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/reader.py\", line 19, in parse_json\n"}
+,{"stream_name":"stderr","time":11.175789896,"data":"    nb_dict = json.loads(s, **kwargs)\n"}
+,{"stream_name":"stderr","time":11.175801189,"data":"              ^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":11.175804841,"data":"  File \"/usr/lib/python3.12/json/__init__.py\", line 346, in loads\n"}
+,{"stream_name":"stderr","time":11.176047877,"data":"    return _default_decoder.decode(s)\n"}
+,{"stream_name":"stderr","time":11.17606444,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":11.17606863,"data":"  File \"/usr/lib/python3.12/json/decoder.py\", line 338, in decode\n"}
+,{"stream_name":"stderr","time":11.176216629,"data":"    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n"}
+,{"stream_name":"stderr","time":11.176271259,"data":"               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":11.176279368,"data":"  File \"/usr/lib/python3.12/json/decoder.py\", line 356, in raw_decode\n"}
+,{"stream_name":"stderr","time":11.176499667,"data":"    raise JSONDecodeError(\"Expecting value\", s, err.value) from None\n"}
+,{"stream_name":"stderr","time":11.176506898,"data":"json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n"}
+,{"stream_name":"stderr","time":11.176510647,"data":"\n"}
+,{"stream_name":"stderr","time":11.176513984,"data":"The above exception was the direct cause of the following exception:\n"}
+,{"stream_name":"stderr","time":11.176517961,"data":"\n"}
+,{"stream_name":"stderr","time":11.176521799,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":11.176533172,"data":"  File \"/usr/local/bin/jupyter-nbconvert\", line 10, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":11.176626948,"data":"    sys.exit(main())\n"}
+,{"stream_name":"stderr","time":11.176633328,"data":"             ^^^^^^\n"}
+,{"stream_name":"stderr","time":11.176647249,"data":"  File \"/usr/local/lib/python3.12/dist-packages/jupyter_core/application.py\", line 284, in launch_instance\n"}
+,{"stream_name":"stderr","time":11.176853194,"data":"    super().launch_instance(argv=argv, **kwargs)\n"}
+,{"stream_name":"stderr","time":11.176861449,"data":"  File \"/usr/local/lib/python3.12/dist-packages/traitlets/config/application.py\", line 1075, in launch_instance\n"}
+,{"stream_name":"stderr","time":11.177258252,"data":"    app.start()\n"}
+,{"stream_name":"stderr","time":11.17727403,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbconvert/nbconvertapp.py\", line 369, in start\n"}
+,{"stream_name":"stderr","time":11.177495467,"data":"    self.convert_notebooks()\n"}
+,{"stream_name":"stderr","time":11.177503086,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbconvert/nbconvertapp.py\", line 541, in convert_notebooks\n"}
+,{"stream_name":"stderr","time":11.177770464,"data":"    self.convert_single_notebook(notebook_filename)\n"}
+,{"stream_name":"stderr","time":11.177777942,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbconvert/nbconvertapp.py\", line 506, in convert_single_notebook\n"}
+,{"stream_name":"stderr","time":11.178044241,"data":"    output, resources = self.export_single_notebook(notebook_filename, resources, input_buffer=input_buffer)\n"}
+,{"stream_name":"stderr","time":11.178132659,"data":"                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":11.178144675,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbconvert/nbconvertapp.py\", line 435, in export_single_notebook\n"}
+,{"stream_name":"stderr","time":11.178381872,"data":"    output, resources = self.exporter.from_filename(notebook_filename, resources=resources)\n"}
+,{"stream_name":"stderr","time":11.178391221,"data":"                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":11.17839562,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbconvert/exporters/exporter.py\", line 190, in from_filename\n"}
+,{"stream_name":"stderr","time":11.178547809,"data":"    return self.from_file(f, resources=resources, **kw)\n"}
+,{"stream_name":"stderr","time":11.178556219,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":11.17855989,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbconvert/exporters/exporter.py\", line 208, in from_file\n"}
+,{"stream_name":"stderr","time":11.178724835,"data":"    return self.from_notebook_node(nbformat.read(file_stream, as_version=4), resources=resources, **kw)\n"}
+,{"stream_name":"stderr","time":11.17873078,"data":"                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":11.178734444,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/__init__.py\", line 174, in read\n"}
+,{"stream_name":"stderr","time":11.178900146,"data":"    return reads(buf, as_version, capture_validation_error, **kwargs)\n"}
+,{"stream_name":"stderr","time":11.178915396,"data":"           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":11.17891954,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/__init__.py\", line 92, in reads\n"}
+,{"stream_name":"stderr","time":11.17906533,"data":"    nb = reader.reads(s, **kwargs)\n"}
+,{"stream_name":"stderr","time":11.179099809,"data":"         ^^^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":11.17911082,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/reader.py\", line 75, in reads\n"}
+,{"stream_name":"stderr","time":11.179222897,"data":"    nb_dict = parse_json(s, **kwargs)\n"}
+,{"stream_name":"stderr","time":11.179229858,"data":"              ^^^^^^^^^^^^^^^^^^^^^^^\n"}
+,{"stream_name":"stderr","time":11.179234192,"data":"  File \"/usr/local/lib/python3.12/dist-packages/nbformat/reader.py\", line 25, in parse_json\n"}
+,{"stream_name":"stderr","time":11.179373933,"data":"    raise NotJSONError(message) from e\n"}
+,{"stream_name":"stderr","time":11.179381665,"data":"nbformat.reader.NotJSONError: Notebook does not appear to be JSON: '# ERDOS–STRAUS V113 — Quantum Flank 31 ...\n"}
 ]

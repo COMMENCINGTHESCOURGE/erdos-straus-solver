@@ -1,0 +1,7 @@
+# Ray + MLflow + GPU starter requirements for erdos-straus-solver
+# CPU-first: ray runtime. Add GPU and MLflow support for experiments.
+ray[default]>=2.10.0
+mlflow>=2.16.0
+# GPU: choose the cupy wheel that matches your CUDA version. This targets CUDA 12.x.
+# If your environment uses a different CUDA version, change this line accordingly.
+cupy-cuda12x; sys_platform != 'darwin'
