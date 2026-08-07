@@ -1,0 +1,50 @@
+name: Sieve Verification
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - verify_sieve.py
+      - sieve_l40s_hot_corridor.py
+      - .github/workflows/sieve-verify.yml
+  pull_request:
+    branches: [ "master" ]
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Corridor scan limit (multiples of 24)'
+        required: false
+        default: '1000000'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ "3.11", "3.12" ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run hot-corridor sieve verification
+        run: |
+          LIMIT=${{ github.event.inputs.limit || '1000000' }}
+          python verify_sieve.py --limit "$LIMIT"
+      - name: Show verification report
+        if: always()
+        run: |
+          if [ -f verify_sieve_report.json ]; then
+            cat verify_sieve_report.json
+          fi
+      - name: Upload verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-sieve-report-${{ matrix.python-version }}
+          path: verify_sieve_report.json
