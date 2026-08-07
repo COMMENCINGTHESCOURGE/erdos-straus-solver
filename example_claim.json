@@ -1,0 +1,20 @@
+{
+  "claim_type": "upper_bound",
+  "value": 1000000000,
+  "evidence_commitment": {
+    "merkle_root": "sha256:fd9a1b60e84ff768d100aa6700563b8eb91bac5805771ad39537cadb77d69a6d",
+    "witness_count": 2529425,
+    "checkpoint_hashes": [
+      "sha256:<sha256-of-exact-release-asset>",
+      "sha256:<sha256-of-exact-release-asset>"
+    ]
+  },
+  "coverage_type": "continuous",
+  "exceptions": [],
+  "verified_interval": {
+    "start_inclusive": 2,
+    "end_inclusive": 1000000000
+  },
+  "timestamp": "2026-06-27T01:31:48.368067Z",
+  "verifier_signature": "<base64-encoded-signature-over-canonicalized-claim-json>"
+}

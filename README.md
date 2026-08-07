@@ -19,6 +19,35 @@ This repository contains the cryptographic execution hashes and local manifest d
 
 ---
 
+## Verification Protocol
+
+This repository implements the **Erdős–Straus Verification Protocol v2.0** (see [`VERIFICATION_RFC.md`](VERIFICATION_RFC.md)). Key principles:
+
+1. **Baseline Consistency:** Extension multipliers use standard baseline (10¹³ to 10¹⁷ = 10,000×)
+2. **Disaggregated Counting:** Distinguishes `n_directly_evaluated`, `n_discharged_by_proven_rule`, `sieve_survivors`, `witnesses_verified`
+3. **Coverage Semantics:** `coverage_type: "continuous"` requires empty `exceptions` array
+4. **Witness Verification:** Every non-excluded n must have machine-checkable (x,y,z) triple or independent proof
+5. **Semantic Validation:** JSON Schema validates structure; `verify_claims.py` enforces semantic constraints
+
+### Example Usage
+
+```bash
+# Verify claims against coverage declaration
+python tools/verify_claims.py --claims example_claim.json --coverage example_coverage.json
+
+# Generate portal text from verified claims
+python tools/verify_claims.py --claims example_claim.json --coverage example_coverage.json --generate-portal
+
+# Validate with witness database
+python tools/verify_claims.py --claims claims.json --coverage coverage.json --witnesses witnesses.db
+```
+
+### Important Notice on Unverified Claims
+
+> Claims about ranges beyond verified bounds (e.g., 10¹⁷) without accompanying witness data or sieve proofs shall be marked as **"insufficient evidence; cannot be cited as verified"** rather than "invalid" or "false". Lack of evidence means the claim is unproven, not disproven.
+
+---
+
 ## 🗂️ Unified Repository Structure
 
 ```
@@ -27,10 +56,15 @@ commencethescourge-erdos/
 ├── erdos_manifest.json           # Ground-truth verification manifest
 ├── erdos_aggregates.json         # Modulo corridor breach aggregates
 ├── KAGGLE_OUTPUT_RECORD.jsonl    # Remote Kaggle execution audit trail
+├── VERIFICATION_RFC.md           # Verification protocol specification
+├── claims_schema.json            # JSON Schema for claims validation
+├── example_claim.json            # Example verified claim
+├── example_coverage.json         # Example coverage declaration
 ├── harness/
 │   └── erdos_straus_harness.py   # Numba @njit JIT solver & exact arithmetic verifier
 ├── tools/
-│   └── build_erdos_sieve_notebook.py # Automated Kaggle nbformat v4 generator
+│   ├── build_erdos_sieve_notebook.py # Automated Kaggle nbformat v4 generator
+│   └── verify_claims.py          # Semantic verifier for claims
 └── benchmarks/
     ├── erdos_h100_output.log     # NVIDIA H100 GPU benchmark run log
     └── erdos_h200_output.log     # NVIDIA H200 GPU benchmark run log
