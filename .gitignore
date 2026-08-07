@@ -38,7 +38,7 @@ env/
 
 # Kaggle kernel metadata (regenerated per notebook)
 kernel-metadata.json
-
+v113_quantum_flank_31.ipynb
 # System specific files
 .DS_Store
 Thumbs.db
@@ -54,3 +54,6 @@ desktop.ini
 
 cold_storage/**/*.json
 cold_storage/*.json
+
+# Lean (formalization)
+/.lake/
