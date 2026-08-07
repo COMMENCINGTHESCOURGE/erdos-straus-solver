@@ -3,123 +3,140 @@
 [![Python Tests](https://github.com/GUINEA-PIG-TRENCH/erdos-straus-solver/actions/workflows/python-tests.yml/badge.svg)](https://github.com/GUINEA-PIG-TRENCH/erdos-straus-solver/actions/workflows/python-tests.yml)
 [![Sieve Verification](https://github.com/GUINEA-PIG-TRENCH/erdos-straus-solver/actions/workflows/sieve-verify.yml/badge.svg)](https://github.com/GUINEA-PIG-TRENCH/erdos-straus-solver/actions/workflows/sieve-verify.yml)
 [![OEIS Verification](https://github.com/GUINEA-PIG-TRENCH/erdos-straus-solver/actions/workflows/oeis-verify.yml/badge.svg)](https://github.com/GUINEA-PIG-TRENCH/erdos-straus-solver/actions/workflows/oeis-verify.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green)](./LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue)](./LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/)
 
 **Part of the MANIFOLD field computation system.**
-**Lead R&D: DaShawn (African American Developer & Mathematician)**
+**Lead R&D: DaShawn (Guinea Pig Trench LLC)**
 **Copyright (c) 2026 Guinea Pig Trench LLC**
 
 ---
 
-Erdos-Straus hot corridor sieve â€” integer solver, stride-24, 100% hit rate in mod-24 corridors (expected: these corridors are pre-filtered to numbers where parametric identities apply).
+## What this project is
 
-The Erdos-Straus conjecture states that for every integer n â‰¥ 2, the fraction 4/n can be expressed as the sum of three unit fractions (Egyptian fractions). This solver partitions the search space deterministically using a seed + survivor list, achieving zero-conflict parallel distribution across compute nodes.
+An **empirical, structural study of the Erdős–Straus conjecture in the
+prime-square regime**, with deterministic sieving tooling and CI-enforced
+verification.
 
-This is the vinculum operating on integers instead of fields â€” same algebraic skeleton, different substrate.
+The Erdős–Straus conjecture (1948): every integer `n ≥ 2` admits
+`4/n = 1/x + 1/y + 1/z` with positive integers `x ≤ y ≤ z`. The conjecture
+remains **unproven**. This repository does **not** claim a proof. Its purpose
+is:
+
+1. A deterministic, reproducible **hot-corridor sieve** for existence checks
+   (`sieve_l40s_hot_corridor.py`), developed for distributed runs, with
+   integer-only arithmetic and CI gates (`verify_sieve.py`).
+2. A **structural classification** of the prime-square equation `4/p²` via the
+   "additive shift" framework (`A`-values / 22-portal classification), with an
+   OEIS-ready representative data file for the distribution of minimal
+   `A` over exceptional primes.
+
+Every discovered triple is re-verified in exact integer arithmetic, both
+locally (`verify_sieve.py`) and in CI on every push.
 
 ---
 
-## ðŸ† Key Results (Verified July 2026)
+## Position relative to the literature (be concrete)
 
-| Claim | Status |
-| --- | --- |
-| **Sieve existence check** | **Computational run through ~8.00e13 (80 trillion) on Kaggle; zero survivors. Literature has reached 1e17-1e18 for plain existence checks. The novel contribution is the 22-portal classification at 1e8 -- see EMPIRICAL_NOTE.md.** |
-| All tested exceptional-prime-indexed prime squares ($p^2$) solved | **289,372/289,372 up to 10â¸ (100%). Note: solutions are for $4/p^2$, not $4/p$. A descent theorem is required to extend to $4/p$.** |
-| 22-portal classification covers all tested $p^2$ | **22 A-values, max A=159** |
-| Zero failures at any scale | <!-- ZERO_FAILURES_START --> **10â¶: 4540/4540, 10â·: 35750/35750, 10â¸: 289372/289372** <!-- ZERO_FAILURES_END --> |
-| Mean minimal m = 2.25 | Tightly bounded |
-| A=7 dominates at ~49.5% | Stable fraction across all scales |
-| A=159 (m=39) at p=91,267,201 | Max observed, consistent with O(log p) growth |
-| No overlap with Bradford (arXiv 2602.11774) solutions | 0.0% (y,z) agreement on shared n |
-| Squareful barrier: Bradford fails on ALL squareful n | Structural, not implementation artifact |
-| Xu (May 2026): 9 wild primes for mâ‰¤30,000 | **All 9 fall within 12-portal classification (for $4/p^2$)** |
+Computational support for Erdős–Straus has a long record. This repository
+needs to be read in that light:
 
-**The 22 A-values (the "12 portals" plus higher terms):** 7, 11, 15, 19, 23, 31, 39, 43, 47, 51, 59, 67, 71, 79, 83, 87, 95, 103, 107, 111, 127, 159
+| Bound reached | Year | Author(s) |
+| --- | --- | --- |
+| `10¹⁴` | 1999 | Allan D. Swett |
+| `2×10¹⁴` | 2012 | Bello-Hernández, Benito, Fernández |
+| `10¹⁷` | 2014 | Serge E. Salez (arXiv:1406.6307) |
+| `10¹⁸` | 2025 | Mihnea & Dumitru (arXiv:2509.00128) |
 
-**OEIS Submission:** Prepared â€” ready for submission to oeis.org/Submit
+The sieve's own existence runs (8×10¹³ on Kaggle) re-confirm a range already
+covered since 1999 — they are **not** a verification record. The genuinely
+distinct content here is the **`4/p²` portal classification to 8×10⁸
+(tested primes ≤ 10⁸)**, i.e. a structural map of minimal `A`, not an
+extension of the verified bound.
 
-- Data file: `oeis_a_values_data.txt` (distribution counts)
-- b-file: `oeis_b_file.txt` (22 distinct A-values)
-- b-file: `bfile_exceptional_1000.txt` (A per exceptional prime, first 1000)
-- Generator: `gen_oeis_bfile.py` (produces b-file for N exceptional primes)
+### The key distinction: `4/p²` vs `4/p`
 
-## State of the Art & AI Baseline (2026)
+- This repo classifies **`4/p²`** (prime squares). Any solution for `4/p`
+  immediately yields one for `4/p²` by scaling denominators by `p`;
+  the converse requires a descent step that is **not proved in this
+  repository** (see [PROOF_SKETCH.md](PROOF_SKETCH.md), which states the
+  remaining work explicitly).
+- The conjecture is most challenge in the **prime case `4/p`**. Composite `n`
+  reduce to primes by scaling. No result here claims progress on `4/p`.
 
-This project is explicitly anchored against the 2026 AI mathematics wave. While autonomous reasoning models (e.g., GPT-5.2 paired with Lean/Aristotle) have successfully cleared hundreds of "long-tail" or neglected ErdÅ‘s problems, they structurally fail at frontier, open-ended research.
+---
 
-Because the ErdÅ‘s-Straus conjecture is a frontier problem, it breaks zero-shot AI provers. Therefore, this repository uses a **hybrid architecture**: AI models provide the theoretical scaffolding and write the hyper-optimized C/Python sieves, while deterministic GPU clusters (like Kaggle P100s) map the prime geometry. This repository provides the **empirical geometric blueprint** and vital theoretical scaffolding for the $4/p^2$ domain, strictly separated from the analytic **descent theorem** required to fully bridge solutions to $4/p$.
+## Claims (scoped)
 
-## Architecture
+| Claim | Scope | Status |
+| --- | --- | --- |
+| Corridor existence check | `n ≡ 0 (mod 24)`, hot corridor | `8×10¹³` on Kaggle, zero failures — **within already-verified territory** (CI re-checks to 10⁶ on every push) |
+| `4/p²` solved for tested exceptional primes | `p ≤ 10⁸` (289,372 primes) | 100% — **range contained in the 10¹⁸ record**; novelty is the classification |
+| 22-portal classification | `4/p²`, minimal `A` values | Empirically exhaustive to `p ≤ 10⁸`, `A ≤ 159` — **empirical, not proved** |
+| `A=7` dominance ~49.5%, `A=159` (max) | same range | Stable across scales (empirical) |
+| Comparison vs arXiv:2602.11774 (2026) | disjoint `(y,z)` sets | Structural comparison only; that preprint is itself in active review — no validity claim made either way |
+| Relation to `4/p` | descent | **open — explicitly flagged as unproven (PROOF_SKETCH.md §7.2)** |
 
-### The Hot Corridor Sieve
+The 22 A-values: 7, 11, 15, 19, 23, 31, 39, 43, 47, 51, 59, 67, 71, 79, 83,
+87, 95, 103, 107, 111, 127, 159.
 
-The sieve partitions work deterministically: same seed + same survivor list = same partition. This is **parallel transport** of number theory problems across compute nodes â€” the manifold geometry of the solution space.
+**OEIS submission (empirical data):** prepared, as representative data, not as
+a theorem —
+- `oeis_a_values_data.txt` (distribution counts)
+- `oeis_b_file.txt` (22 distinct `A`-values)
+- `bfile_exceptional_1000.txt` (per-exceptional-prime `A`, first 1000)
+- `gen_oeis_bfile.py` (b-file generator)
 
-- **Stride-24**: exploits the mod-24 structure of known solution corridors
-- **Mod9 classification**: STABLE (1,4,7), BREACH (0,3,6), NEUTRAL (2,5,8)
-- **Seeded partitioning**: any node with the same seed produces identical work boundaries
+---
 
-### Components
-
-| File | Purpose |
-| --- | --- |
-| `sieve_l40s_hot_corridor.py` | Primary sieve runner â€” stride-24, hot corridor targeting |
-| `master_orchestrator.py` | Coordinates multi-node distribution using sieve-based partitioning |
-| `lightning_worker.py` | Remote compute worker for distributed runs |
-| `progression.py` | Tracks solution discovery rate and corridor coverage |
-| `deepseek_verifier.py` | Parallel verification against DeepSeek reasoning |
-| `atomic_writer.py` | Thread-safe checkpoint writer for long-running sieves |
-| `sieve_a100.py` / `sieve_a100_classify.py` | A100-optimized sieve + mod9 classification |
-
-## Quick Start
+## How to verify
 
 ```bash
 git clone https://github.com/GUINEA-PIG-TRENCH/erdos-straus-solver.git
 cd erdos-straus-solver
-python sieve_l40s_hot_corridor.py --v 2 --stride 24 --depth 200
+
+# Corridor gate (fast, exact): asserts 100% coverage + exact arithmetic
+python verify_sieve.py --limit 1000000
+
+# Unit tests
+python -m pytest tests/ -x -v
 ```
 
-For distributed runs:
+CI runs the same gate on every push:
+- `Sieve Verification` — corridor coverage + exact triple arithmetic
+  (Python 3.11 / 3.12)
+- `Python Tests` — unit tests + dataset verification
+- `OEIS Verification` — final-verify + OEIS A-value regression check
 
-```bash
-# Orchestrator node
-python master_orchestrator.py --seed 42 --nodes 3
+---
 
-# Worker nodes
-python lightning_worker.py --orchestrator <ip>:<port>
-```
+## Architecture
 
-## Verification
+- `sieve_l40s_hot_corridor.py` — primary sieve runner, stride-24 corridor.
+- `master_orchestrator.py` / `lightning_worker.py` — deterministic
+  seed-based partitioning across nodes.
+- `final_verify.py` / `delta_analysis.py` — verification and OEIS data tools.
+- `endpoint pro`: notebooks for Kaggle/Colab GPU runs (see Deployment).
 
-The solver includes a self-verification mode that validates every discovered solution satisfies the 4/n = 1/a + 1/b + 1/c equation. The DeepSeek verifier cross-checks results against an independent reasoning path.
-
-## The Vinculum Connection
-
-Every measurement in this system is a vinculum:
-
-| Ratio | What it measures |
-| --- | --- |
-| solutions / search space | Discovery progress |
-| stride width / n | Corridor efficiency |
-| verified / total | Solution quality |
-| nodes with seed / total nodes | Partition completeness |
-
-Same vinculum operator, applied to integers instead of GPU fields.
+---
 
 ## Deployment
 
-- **Kaggle (Scale Prover)**: `commencethescourge/erdos-straus-scale-prover` â€” Numba-JIT accelerated Omega solver for 10â¹ range verification
-- **Kaggle (Hot Corridor)**: `commencethescourge/erdos-p100-hot-corridor-sieve` â€” P100 GPU, daily schedule
-- **Colab**: [erdos_colab_gpu_sieve.ipynb](erdos_colab_gpu_sieve.ipynb) â€” CuPy-accelerated hot corridor sieve for T4/L4/A100 GPU runtimes with Google Drive auto-resume support.
-- **Colab LLM Verifier**: [erdos_colab_llm_verifier.ipynb](erdos_colab_llm_verifier.ipynb) â€” Verification and math resonance analysis utilizing Google Gemini API keys to cross-check solutions and compile markdown reports.
-- **Local**: Bare-metal runs with configurable thread count
+- **Kaggle (Scale Prover)**: `commencethescourge/erdos-straus-scale-prover`
+  — Omega solver, 10⁹-range verification.
+- **Kaggle (Hot Corridor)**: `commencethescourge/erdos-p100-hot-corridor-sieve`
+  — P100 GPU, daily schedule.
+- **Colab**: [erdos_colab_gpu_sieve.ipynb](erdos_colab_gpu_sieve.ipynb)
+  — CuPy-accelerated hot corridor sieve.
+- **Colab LLM Verifier**: [erdos_colab_llm_verifier.ipynb](erdos_colab_llm_verifier.ipynb).
+
+---
 
 ## Entity
 
 | Field | Value |
 | --- | --- |
-| Lead R&D | DaShawn (African American Developer & Mathematician) |
+| Lead R&D | DaShawn (Guinea Pig Trench LLC) |
 | Copyright | Guinea Pig Trench LLC |
 | R&D Entity | Guinea Pig Trench LLC (PA, #13674084) |
 | Credit Facility | Truth Holds Enterprise (PA #7049023) |
