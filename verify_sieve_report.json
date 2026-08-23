@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-08-23T03:50:34.960866+00:00",
+  "corridor_start": 24,
+  "corridor_limit": 100000,
+  "corridor_checked": 4166,
+  "corridor_solved": 4166,
+  "anomalies": [],
+  "depth_counts": {
+    "BREACH_MOD9": 4166
+  },
+  "triples_verified": 16664,
+  "elapsed_seconds": 0.11
+}
