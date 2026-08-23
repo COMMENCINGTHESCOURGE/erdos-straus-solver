@@ -46,7 +46,7 @@ theorem identity3 (k : Nat) (hk : 0 < k) : HasDecomposition (3 * k) := by
 theorem corridor (n : Nat) (hn24 : 24 ∣ n) (hn : 0 < n) :
     HasDecomposition n := by
   rcases hn24 with ⟨k, rfl⟩
-  have hk : 0 < k := Nat.pos_of_mul_pos_right hn
+  have hk : 0 < k := Nat.pos_of_mul_pos_left hn
   refine ⟨18 * k, 18 * k, 18 * k, ?_⟩
   constructor
   · exact Nat.mul_pos (by norm_num : 0 < 18) hk
